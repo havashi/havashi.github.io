@@ -1,0 +1,125 @@
+html, body {
+	font-family: IRANSans !important;
+	font-weight: 300;
+  height: 100%;
+	margin:0;
+	padding:0;
+  outline: none;
+  touch-action: none;
+}
+
+.geoImg {
+    width:100%;
+    margin: 0 auto 10px auto;
+    display: block;
+}
+.geoTitle, .geoAuthor {
+    text-align: center;
+    width: 85%;
+    margin: 0 auto;
+}
+.geoDes {
+    width: 80%;
+    margin: 0 auto;
+    text-align: justify;
+    padding: 0 0 0 10px;
+}
+.geoAudio {
+    width:85%;
+    margin: 20 auto;
+    display: block;
+}
+.geoDateLoc {
+    margin: 0 auto;
+    width: 85%;
+    text-align: center;
+    color: darkslategray;
+}
+
+#wrapper {
+		padding-left: 0;
+		height: 100%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+	padding-left: 350px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 350px;
+		width: 0;
+    height: 100%;
+    margin-left: -350px;
+		text-align: center;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+	width: 350px;
+}
+
+#page-content-wrapper {
+    padding: 20px;
+    position: relative;
+    width: 100%;
+		height: 100%;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+}
+#mapid {
+	height: 100%;
+}
+#menu {
+	position: fixed;
+z-index: 999999999999;
+}
+.pull-right {
+	float: left;
+}
+.mini-submenu{
+  display:none;
+  //background-color: rgba(0, 0, 0, 0);
+  //border: 1px solid rgba(0, 0, 0, 0.5);
+  //border-radius: 4px;
+  padding: 9px;
+  /*position: relative;*/
+
+}
+
+.mini-submenu:hover{
+  cursor: pointer;
+}
+
+.mini-submenu .icon-bar {
+  border-radius: 1px;
+  display: block;
+  height: 2px;
+  width: 22px;
+  margin-top: 3px;
+}
+
+.mini-submenu .icon-bar {
+  background-color: #000;
+}
+
+#slide-submenu{
+  background: rgba(0, 0, 0, 0.45);
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}

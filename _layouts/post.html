@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<div id="case-timeline"></div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#wrapper").addClass("toggled");
+
+  createStoryJS({
+    type:		'timeline',
+    height:		'100%',
+    lang:				'fa',							//OPTIONAL LANGUAGE
+    source:		'/assets/ut/json/timeline.json',
+    embed_id:	'case-timeline',
+    hash_bookmark:		true,
+    font:				'IRANSans'				//OPTIONAL FONT
+  });
+});
+</script>

@@ -1,0 +1,67 @@
+{
+	"timeline":
+	{
+		"headline":"طرح توسعه دانشگاه تهران",
+		"type":"default",
+		"text":"<p>طرح توسعه دانشگاه تهران از ابتدای دهه ۱۳۷۰ مطرح و برای سه دهه ساکنان پیرامون این دانشگاه را با چالش‌های مختلف روبرو کرده است.</p>",
+		"asset": {
+			"media":"/assets/ut/img/timeline-cover.jpg",
+			"credit":"روزنامه فرهیختگان",
+			"caption":"طرح توسعه دانشگاه تهران"
+		},
+		"date": [
+			{
+				"startDate":"1398,11,20",
+				"endDate":"1398,11,20",
+				"headline":"نامه اعتراض بیش از ۲۰۰ نفر از متخصصان معماری و شهرسازی به تصمیم رئیس جمهور",
+				"text":"<p>تقاضای لغو دستور رئیس جمهور مبنی بر غیرقانونی خواندن مصوبه شورای عالی شهرسازی و معماری درخصوص طرح توسعه دانشگاه تهران</p>",
+				"tag":"اعتراضات",
+				"classname":"optionaluniqueclassnamecanbeaddedhere",
+				"asset": {
+					"media":"/assets/ut/img/slide-200pro.jpg",
+					"thumbnail":"optional-32x32px.jpg",
+					"credit":"<a href='https://t.me/UniBTeh/418'>کانال دانشگاه بدون تهران</a>",
+					"caption":"<a href='https://b2n.ir/086397'>متن و فرم امضای نامه</a>"
+				}
+			},
+			{
+				"startDate":"1398,10,22",
+				"endDate":"1398,10,22",
+				"headline":"رئیس‌جمهور مصوبۀ شورای‌عالی شهرسازی و معماری را خلاف قانون اعلام کرد",
+				"text":"<p>پس از اعلام نظر معاونت حقوقی ریاست جمهوری مبنی بر خلاف قانون بودن مصوبه به علت ورود شورای‌عالی به روابط حقوقی اشخاص (!) خبرها حاکی از آن است که رئیس‌جمهور در اقدامی نادر و بر اساس اعلام نظر معاونت حقوقی، در نامه‌ای، مصوبۀ شورای‌عالی را خلاف قانون اعلام کرده است! </p>",
+				"tag":"دولت",
+				"classname":"optionaluniqueclassnamecanbeaddedhere",
+				"asset": {
+					"media":"/assets/ut/img/slide-president.jpg",
+					"thumbnail":"optional-32x32px.jpg",
+					"credit":"<a href='https://t.me/UniBTeh/401'>کانال دانشگاه بدون تهران</a>",
+					"caption":"نامه لعیا جنیدی معاون حقوقی رئیس جمهور"
+				}
+			},
+			{
+				"startDate":"1398,9,23",
+				"endDate":"1398,9,23",
+				"headline":"شکایت مردم از تأخیر در اجرای مصوبۀ شورای‌عالی شهرسازی و معماری",
+				"text":"<p>مردم محدودۀ دانشگاه تهران در نامه‌ای به فرزانه صادق، معاونت شهرسازی و معماری وزارت راه و شهرسازی و دبیر شورای‌عالی، از به تأخیرافتادن اجرای مصوبۀ اخیر دربارۀ طرح توسعۀ دانشگاه تهران گله کردند و با اشاره به نقش مثبت شورای‌عالی شهرسازی و معماری بر توجه‌نمودن به حقوق مردم، از ایشان خواستند تا با تصمیمی قاطع مانع از تضییع دوبارۀ حقوق مردم شوند.</p>",
+				"tag":"اعتراضات",
+				"classname":"optionaluniqueclassnamecanbeaddedhere",
+				"asset": {
+					"media":"/assets/ut/img/slide-tosadegh.jpg",
+					"thumbnail":"optional-32x32px.jpg",
+					"credit":"<a href='https://t.me/UniBTeh/398'>کانال دانشگاه بدون تهران</a>",
+					"caption":"متن نامه شکایت مردم"
+				}
+			}
+		],
+		"era": [
+			{
+				"startDate":"2011,12,10",
+				"endDate":"2011,12,11",
+				"headline":"Headline Goes Here",
+				"text":"<p>Body text goes here, some HTML is OK</p>",
+				"tag":"This is Optional"
+			}
+
+		]
+	}
+}

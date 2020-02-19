@@ -1,0 +1,74 @@
+---
+layout: default
+---
+{% assign filtered_posts = site.posts | where: 'case', page.slug  %}
+
+<div id="case-timeline"></div>
+<script type="text/javascript">
+  $("#wrapper").addClass("toggled");
+  $(document).ready(function() {
+	var dataObject = {
+	timeline:
+	{
+		headline:"{{page.title}}",
+		type:"default",
+		text:"{{page.tlCoverTxt}}",
+		asset: {
+			media:"{{page.tlImgCover}}",
+			credit:"{{page.tlImgCredit}}",
+			caption:"{{page.tlImgCaption}}"
+		},
+		date: [
+    {% for post in filtered_posts %}
+			{
+				startDate:"{{post.startDate}}",
+				endDate:"{{post.endDate}}",
+				headline:"{{post.title}}",
+				text:"{{post.text}}",
+				tag:"{{post.tag}}",
+				classname:"optionaluniqueclassnamecanbeaddedhere",
+				asset: {
+					media:"{{post.media}}",
+					thumbnail:"{{post.thumbnail}}",
+					credit:"{% if post.mediaCreditUrl %}<a href='{{post.mediaCreditUrl}}' target='blank'>{%endif%}{{post.mediaCredit}}{% if post.mediaCreditUrl %}</a>{%endif%}",
+					caption:"{% if post.mediaCaptionUrl %}<a href='{{post.mediaCaptionUrl}}' target='blank'>{%endif%}{{post.mediaCaption}}{% if post.mediaCaptionUrl %}</a>{%endif%}"
+				}
+			},
+      {% endfor %}
+		],
+		era: [
+			{
+				startDate:"2011,12,10",
+				endDate:"2011,12,11",
+				headline:"Headline Goes Here",
+				text:"<p>Body text goes here, some HTML is OK</p>",
+				tag:"This is Optional"
+			}
+
+		]
+	}
+};
+  createStoryJS({
+    type:		'timeline',
+    height:		'100%',
+    lang:				'fa',							//OPTIONAL LANGUAGE
+    source:		dataObject,
+    embed_id:	'case-timeline',
+    hash_bookmark:		true,
+    font:				'IRANSans'				//OPTIONAL FONT
+  });
+});
+var smap = L.map('sideMap').setView([{{page.location}}], 17);
+Thunderforest_TransportDark.addTo(smap);
+$.getJSON("/assets/{{page.slug}}/json/bound.geojson",function(data){
+                // add GeoJSON layer to the map once the file is loaded
+                jsonLayer = L.geoJson(data, {
+
+                    // style: {color: "#999", weight: 2, fillColor: "#00ad79", fillOpacity: .6},
+                })
+               jsonLayer.addTo(smap);
+               smap.fitBounds(jsonLayer.getBounds(), {
+            padding: [10, 10]
+        });
+            });
+</script>

@@ -1,0 +1,27 @@
+<div id="mainSidenav" class="sidenav" onclick="openNav()" >
+    <div id="sideNavContent">
+        <a onclick="openNav()" href="#"><i class="fas fa-bars"></i></a>
+        <a class="accordion-toggle nav-title"><i class="fas fa-bullhorn fa-flip-horizontal"></i> تلفات عابرپیاده بابل</a>
+        <p style="text-align:center;"><span id="dayDiff"></span> روز بدون تلفات عابرپیاده در بابل</p>
+        <a href="#content-1" class="accordion-toggle"><i class="fas fa-info" class="accordion-toggle"></i> آمار</a>
+        <div class="accordion-content active" id="content-1">
+          <select id="chartFilter" name="filter">
+             <option value="pedSex">جنسیت</option>
+             <option value="pedAgeCat">سن</option>
+             <option value="accTimeCat">زمان تصادف</option>
+             <option value="accLocCat">محل تصادف</option>
+             <option value="geoAccWith">تصادف عابر با ...</option>
+         </select>
+         <canvas id="myChart"></canvas>
+        </div>
+        <a href="#content-2" class="accordion-toggle"><i class="fas fa-car-crash"></i> گزارش مردمی</a>
+        <div class="accordion-content" id="content-2">
+        </div>
+        <a href="#content-3" class="accordion-toggle"><i class="fas fa-flag" class="accordion-toggle"></i> گزارش خطا</a>
+        <div class="accordion-content" id="content-3">
+        </div>
+        <a href="#content-4" class="accordion-toggle"><i class="fas fa-reply-all" class="accordion-toggle"></i> تماس با ما</a>
+        <div class="accordion-content" id="content-4">
+        </div>
+    </div>
+</div>
