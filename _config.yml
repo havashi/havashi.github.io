@@ -62,6 +62,7 @@ defaults:
       type: "cases"
     values:
       layout: "case"
+      sidebar: "yes"
   - scope:
       path: ""
       type: "posts"

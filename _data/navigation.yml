@@ -1,0 +1,10 @@
+- name: صفحه نخست
+  link: /
+- name: درباره
+  link: /about
+- name: روایات
+  link: /stories
+- name: ارسال روایت
+  link: /send
+- name: تماس
+  link: /contact
