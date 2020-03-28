@@ -3,7 +3,7 @@ layout: default
 sidebar: 'no'
 ---
 {% assign filtered_posts = site.posts | where: 'case', page.slug  %}
-
+{% assign post_count = filtered_posts.size %}
 <div id="case-timeline"></div>
 <script type="text/javascript">
   $(document).ready(function() {

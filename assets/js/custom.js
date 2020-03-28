@@ -11,7 +11,7 @@ $(function(){
 
       });
 
-	$('.mini-submenu').on('click',function(){
+	$('#menuIcon').on('click',function(){
         $('#menuList').toggle('slide');
         $('#menuIcon').toggleClass('fa-bars fa-times');
 })

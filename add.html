@@ -1,0 +1,181 @@
+---
+layout: default
+---
+<script type="text/javascript">
+
+$(document).ready(function() {
+  var to, from;
+to = $("#endDate").persianDatepicker({
+  initialValue: false,
+  responsive: true,
+  format: 'L',
+  autoClose: true,
+  altField: '#endDateU',
+  calendar:{
+    persian:{
+      showHint: true
+    },
+    gregorian:{
+      showHint: true
+    }
+  },
+  onSelect: function (unix) {
+        to.touched = true;
+        if (from && from.options && from.options.maxDate != unix) {
+            var cachedValue = from.getState().selected.unixDate;
+            from.options = {maxDate: unix};
+            if (from.touched) {
+                from.setDate(cachedValue);
+            }
+        }
+    }
+});
+from = $("#startDate").persianDatepicker({
+  initialValue: false,
+  responsive: true,
+  format: 'L',
+  autoClose: true,
+  altField: '#startDateU',
+  calendar:{
+    persian:{
+      showHint: true
+    },
+    gregorian:{
+      showHint: true
+    }
+  },
+  onSelect: function (unix) {
+        from.touched = true;
+        if (to && to.options && to.options.minDate != unix) {
+            var cachedValue = to.getState().selected.unixDate;
+            to.options = {minDate: unix};
+            if (to.touched) {
+                to.setDate(cachedValue);
+            }
+        }
+    }
+});
+});
+</script>
+    <div class="container mt-5">
+      <div class="row mt-5">
+
+      </div>
+        <!--Add few elements to the form-->
+        <div class="row mt-5">
+          <div class="col"><input type="text" class="form-control" autofocus id="title" placeholder="عنوان..." /></div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" lang="en" dir="ltr" class="form-control" id="txtCase" placeholder="case..." />
+          </div>
+          <div class="col">
+            <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" placeholder="slug..." />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" id="startDate" placeholder="تاریخ شروع..." />
+            <input type="hidden" id="startDateU" />
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" id="endDate" placeholder="تاریخ پایان..." />
+            <input type="hidden" id="endDateU" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6"><input type="text" class="form-control" id="tag" placeholder="برچسب..." /></div>
+          <div class="col-2"><input id="mediaFile" class="form-control" type="file"></div>
+          <div class="col-4"><input type="text" lang="en" dir="ltr" class="form-control" id="mediaUrl" placeholder="Media URL Address..." /></div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" id="mediaCredit" placeholder="منبع مدیا..." />
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCreditUrl" placeholder="Media Credit URL..." />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" id="mediaCaption" placeholder="کپشن مدیا..." />
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" placeholder="Media Caption URL..." />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              <textarea id="text" name="msg" class="form-control" placeholder="توضیح مختصر ..." style="height:100px"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              <input type="button" id="bt" value="Save data to file" class="btn btn-primary btn-lg btn-block" onclick="saveFile()" />
+          </div>
+      </div>
+    </div>
+<script>
+    let saveFile = () => {
+persianDate.toLocale('en');
+        // Get the data from each element on the form.
+        const Case = document.getElementById('txtCase');
+        const Slug = document.getElementById('txtSlug');
+        const title = document.getElementById('title');
+        const endDateU = document.getElementById('endDateU');
+        const endDateFa = new persianDate(parseInt(endDateU.value));
+        const endDateEn = new Date(parseInt(endDateU.value));
+        const startDateU = document.getElementById('startDateU');
+        const startDateFa = new persianDate(parseInt(startDateU.value));
+        const startDateEn = new Date(parseInt(startDateU.value));
+        const tag = document.getElementById('tag');
+        const mediaFile = document.getElementById('mediaFile');
+        const mediaUrl = document.getElementById('mediaUrl');
+        const mediaCredit = document.getElementById('mediaCredit');
+        const mediaCreditUrl = document.getElementById('mediaCreditUrl');
+        const mediaCaption = document.getElementById('mediaCaption');
+        const mediaCaptionUrl = document.getElementById('mediaCaptionUrl');
+        const text = document.getElementById('text');
+        var mediaValue;
+        if (mediaFile.files.length != 0) {
+          var mediaValue = '/assets/cases/' + Case.value +'/'+ mediaFile.files[0].name;
+        } else {
+          var media = document.getElementById('mediaUrl');
+          var mediaValue = media.value;
+        }
+window.formatPersian = false;
+        // This variable stores all the data.
+        let data =
+            '--- \r\n'  +
+            'case: ' + Case.value + ' \r\n' +
+            'title: ' +title.value + ' \r\n' +
+            'startDate: "' + startDateFa.format("YYYY,MM,DD") + '" \r\n' +
+            'endDate: "' + endDateFa.format("YYYY,MM,DD")  + '" \r\n' +
+            'tag: ' + tag.value + ' \r\n' +
+            'media: ' + mediaValue + ' \r\n' +
+            'mediaCredit: ' + mediaCredit.value + ' \r\n' +
+            'mediaCreditUrl: ' + mediaCreditUrl.value + ' \r\n' +
+            'mediaCaption: ' + mediaCaption.value + ' \r\n' +
+            'mediaCaptionUrl: ' + mediaCaptionUrl.value + ' \r\n' +
+            'text: "' + text.value + '"\r\n' +
+            '---';
+
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = startDateEn.toISOString().split("T")[0]+'-'+Case.value+'-'+Slug.value+'.md';	   // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click();
+    }
+</script>

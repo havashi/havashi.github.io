@@ -53,9 +53,11 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+permalink: /:categories/:title/
 collections:
   cases:
     output: true
+    permalink: /:name
 defaults:
   - scope:
       path: ""
