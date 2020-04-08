@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="4bkmj1rpjqh7534"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -63,28 +65,50 @@ from = $("#startDate").persianDatepicker({
       </div>
         <!--Add few elements to the form-->
         <div class="row mt-5">
-          <div class="col"><input type="text" class="form-control" autofocus id="title" placeholder="عنوان..." /></div>
+          <div class="col">
+            <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Tooltip on top" autofocus id="title" placeholder="عنوان..." />
+            <small class="form-text text-muted">
+              عنوان این صفحه از روایت که باید کوتاه و گویا و به فارسی باشد.
+            </small>
+          </div>
         </div>
         <div class="row">
           <div class="col">
             <input type="text" lang="en" dir="ltr" class="form-control" id="txtCase" placeholder="case..." />
+            <small class="form-text text-muted">
+              نام کوتاه روایت با حروف لایتین برای استفاده در آدرس اینترنتی (برای مثال 4rah برای چهارراه ولیعصر)
+            </small>
           </div>
           <div class="col">
             <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" placeholder="slug..." />
+            <small class="form-text text-muted">
+              نام کوتاه این صفحه از روایت با حروف لاتین برای استفاده در آدرس اینترنتی (برای مثال bazgoshaei برای بازگشایی چهارراه ولیعصر)
+            </small>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input type="text" class="form-control" id="startDate" placeholder="تاریخ شروع..." />
             <input type="hidden" id="startDateU" />
+            <small class="form-text text-muted">
+              تاریخ اتفاقی که در این صفحه از روایت رخ داده است به شمسی یا میلادی
+            </small>
           </div>
           <div class="col">
             <input type="text" class="form-control" id="endDate" placeholder="تاریخ پایان..." />
             <input type="hidden" id="endDateU" />
+            <small class="form-text text-muted">
+              در صورتی که اتفاق در یک روز بوده مشابه تاریخ شروع در غیر اینصورت تاریخ پایان اتفاق
+            </small>
           </div>
         </div>
         <div class="row">
-          <div class="col-6"><input type="text" class="form-control" id="tag" placeholder="برچسب..." /></div>
+          <div class="col-6">
+            <input type="text" class="form-control" id="tag" placeholder="برچسب..." />
+            <small class="form-text text-muted">
+              بازیگر این صفحه از روایت. بهتر است تعداد بازیگران هر روایت کمتر از ۴ نفر باشد. برای مثال در چهارراه ولیعصر بازیگران عمده باهمستان، شهرداری، و پلیس بودند.
+            </small>
+          </div>
           <div class="col-2"><input id="mediaFile" class="form-control" type="file"></div>
           <div class="col-4"><input type="text" lang="en" dir="ltr" class="form-control" id="mediaUrl" placeholder="Media URL Address..." /></div>
         </div>
@@ -179,3 +203,4 @@ window.formatPersian = false;
         newLink.click();
     }
 </script>
+<a href="https://dl.dropboxusercontent.com/s/deroi5nwm6u7gdf/advice.png" class="dropbox-saver"></a>
