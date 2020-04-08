@@ -1,5 +1,6 @@
 ---
 layout: default
+title: اضافه کردن روایت
 ---
 <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="4bkmj1rpjqh7534"></script>
 
@@ -61,10 +62,10 @@ from = $("#startDate").persianDatepicker({
 </script>
     <div class="container mt-5">
       <div class="row mt-5">
-
+        <h2 class="px-2 mt-5 text-secondary">اضافه کردن یک صفحه به یک روایت</h2>
       </div>
         <!--Add few elements to the form-->
-        <div class="row mt-5">
+        <div class="row">
           <div class="col">
             <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Tooltip on top" autofocus id="title" placeholder="عنوان..." />
             <small class="form-text text-muted">
@@ -109,28 +110,50 @@ from = $("#startDate").persianDatepicker({
               بازیگر این صفحه از روایت. بهتر است تعداد بازیگران هر روایت کمتر از ۴ نفر باشد. برای مثال در چهارراه ولیعصر بازیگران عمده باهمستان، شهرداری، و پلیس بودند.
             </small>
           </div>
-          <div class="col-2"><input id="mediaFile" class="form-control" type="file"></div>
-          <div class="col-4"><input type="text" lang="en" dir="ltr" class="form-control" id="mediaUrl" placeholder="Media URL Address..." /></div>
+          <div class="col-3">
+            <input id="mediaFile" class="form-control" type="file">
+            <small class="form-text text-muted">
+              فایل مدیا (عکس، فیلم، و ...) مربوط به این صفحه را انتخاب کنید.
+            </small>
+          </div>
+          <div class="col-3">
+            <input type="text" lang="en" dir="ltr" class="form-control" id="mediaUrl" placeholder="Media URL Address..." />
+            <small class="form-text text-muted">
+              یا آدرس اینترنتی آن را وارد کنید. برای مثال http://examp.le/4rah.jpg
+            </small>
+          </div>
         </div>
         <div class="row">
           <div class="col">
             <input type="text" class="form-control" id="mediaCredit" placeholder="منبع مدیا..." />
+            <small class="form-text text-muted">
+              برای حفظ حق نشر، نام منبع مدیا را وارد کنید.
+            </small>
           </div>
           <div class="col">
             <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCreditUrl" placeholder="Media Credit URL..." />
+            <small class="form-text text-muted">
+              آدرس اینترنتی منبع عکس را وارد کنید.
+            </small>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <input type="text" class="form-control" id="mediaCaption" placeholder="کپشن مدیا..." />
+            <small class="form-text text-muted">
+              توضیح مرتبط با عکس را وارد کنید.
+            </small>
           </div>
           <div class="col">
             <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" placeholder="Media Caption URL..." />
+            <small class="form-text text-muted">
+              منبع توضیح عکس را وارد کنید.
+            </small>
           </div>
         </div>
         <div class="row">
           <div class="col">
-              <textarea id="text" name="msg" class="form-control" placeholder="توضیح مختصر ..." style="height:100px"></textarea>
+              <textarea id="text" name="msg" class="form-control" placeholder="شرح مختصری درباره این صفحه از روایت بنویسید..." style="height:100px"></textarea>
           </div>
         </div>
         <div class="row">
@@ -203,4 +226,3 @@ window.formatPersian = false;
         newLink.click();
     }
 </script>
-<a href="https://dl.dropboxusercontent.com/s/deroi5nwm6u7gdf/advice.png" class="dropbox-saver"></a>
