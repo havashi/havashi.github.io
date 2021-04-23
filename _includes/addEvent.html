@@ -1,9 +1,3 @@
----
-layout: default
-title: اضافه کردن روایت
----
-<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="4bkmj1rpjqh7534"></script>
-
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -162,67 +156,3 @@ from = $("#startDate").persianDatepicker({
           </div>
       </div>
     </div>
-<script>
-    let saveFile = () => {
-persianDate.toLocale('en');
-        // Get the data from each element on the form.
-        const Case = document.getElementById('txtCase');
-        const Slug = document.getElementById('txtSlug');
-        const title = document.getElementById('title');
-        const endDateU = document.getElementById('endDateU');
-        const endDateFa = new persianDate(parseInt(endDateU.value));
-        const endDateEn = new Date(parseInt(endDateU.value));
-        const startDateU = document.getElementById('startDateU');
-        const startDateFa = new persianDate(parseInt(startDateU.value));
-        const startDateEn = new Date(parseInt(startDateU.value));
-        const tag = document.getElementById('tag');
-        const mediaFile = document.getElementById('mediaFile');
-        const mediaUrl = document.getElementById('mediaUrl');
-        const mediaCredit = document.getElementById('mediaCredit');
-        const mediaCreditUrl = document.getElementById('mediaCreditUrl');
-        const mediaCaption = document.getElementById('mediaCaption');
-        const mediaCaptionUrl = document.getElementById('mediaCaptionUrl');
-        const text = document.getElementById('text');
-        var mediaValue;
-        if (mediaFile.files.length != 0) {
-          var mediaValue = '/assets/cases/' + Case.value +'/'+ mediaFile.files[0].name;
-        } else {
-          var media = document.getElementById('mediaUrl');
-          var mediaValue = media.value;
-        }
-window.formatPersian = false;
-        // This variable stores all the data.
-        let data =
-            '--- \r\n'  +
-            'case: ' + Case.value + ' \r\n' +
-            'title: ' +title.value + ' \r\n' +
-            'startDate: "' + startDateFa.format("YYYY,MM,DD") + '" \r\n' +
-            'endDate: "' + endDateFa.format("YYYY,MM,DD")  + '" \r\n' +
-            'tag: ' + tag.value + ' \r\n' +
-            'media: ' + mediaValue + ' \r\n' +
-            'mediaCredit: ' + mediaCredit.value + ' \r\n' +
-            'mediaCreditUrl: ' + mediaCreditUrl.value + ' \r\n' +
-            'mediaCaption: ' + mediaCaption.value + ' \r\n' +
-            'mediaCaptionUrl: ' + mediaCaptionUrl.value + ' \r\n' +
-            'text: "' + text.value + '"\r\n' +
-            '---';
-
-        // Convert the text to BLOB.
-        const textToBLOB = new Blob([data], { type: 'text/plain' });
-        const sFileName = startDateEn.toISOString().split("T")[0]+'-'+Case.value+'-'+Slug.value+'.md';	   // The file to save the data.
-		const data = textToBLOB, filename =
-        let newLink = document.createElement("a");
-        newLink.download = sFileName;
-
-        if (window.webkitURL != null) {
-            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-        }
-        else {
-            newLink.href = window.URL.createObjectURL(textToBLOB);
-            newLink.style.display = "none";
-            document.body.appendChild(newLink);
-        }
-
-        newLink.click();
-    }
-</script>

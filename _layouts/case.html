@@ -5,70 +5,218 @@ sidebar: 'no'
 {% assign filtered_posts = site.posts | where: 'case', page.slug  %}
 {% assign post_count = filtered_posts.size %}
 <div id="case-timeline"></div>
+<div id="formAddEvent" style="display:none;">
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+    var to, from;
+  to = $("#endDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#endDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          to.touched = true;
+          if (from && from.options && from.options.maxDate != unix) {
+              var cachedValue = from.getState().selected.unixDate;
+              from.options = {maxDate: unix};
+              if (from.touched) {
+                  from.setDate(cachedValue);
+              }
+          }
+      }
+  });
+  from = $("#startDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#startDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          from.touched = true;
+          if (to && to.options && to.options.minDate != unix) {
+              var cachedValue = to.getState().selected.unixDate;
+              to.options = {minDate: unix};
+              if (to.touched) {
+                  to.setDate(cachedValue);
+              }
+          }
+      }
+  });
+  });
+  </script>
+      <div class="container pt-3">
+        <div class="row mt-5">
+          <h3 class="px-2 mt-5 text-secondary">اضافه کردن یک صفحه به روایت {{page.title}}</h3>
+        </div>
+          <!--Add few elements to the form-->
+          <div class="row">
+            <div class="col form-group">
+              <label for="title">عنوان</label>
+              <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Tooltip on top" autofocus id="title" placeholder="کوتاه و گویا و به فارسی ..." />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="startDate">از تاریخ</label>
+              <input type="text" class="form-control" id="startDate" placeholder="تاریخ شروع..." />
+              <input type="hidden" id="startDateU" />
+            </div>
+            <div class="col form-group">
+              <label for="endDate">تا تاریخ</label>
+              <input type="text" class="form-control" id="endDate" placeholder="در صورتی که اتفاق در یک روز بوده مشابه تاریخ شروع در غیر اینصورت تاریخ پایان اتفاق" />
+              <input type="hidden" id="endDateU" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 git" id="featureImg">
+              <label>تصویر شاخص</label>
+              <input type="file" class="uploadImg" id="file" >
+              <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature image" data-path="assets/img/posts/" data-name="postSlug">بارگذاری</a>
+              <a href="" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;">نمایش</a>
+              <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger" style="display: none;">حذف</a>
+              <input type="text" class="uploadedImg" name="imgCaption" id="imgCaption" placeholder="توضیح و منبع عکس ..." value="" style="display: none; width:400px">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="text">توضیح</label>
+                <textarea id="text" name="msg" class="form-control" placeholder="شرح مختصری درباره این صفحه از روایت بنویسید..." style="height:100px"></textarea>
+            </div>
+          </div>
+          <div class="row admin bg-light p-2">
+            <h3>تنظیمات ویراستاری</h3>
+          </div>
+          <div class="row admin bg-light">
+            <div class="col-6 form-group">
+              <label for="tag">برچسب</label>
+              <input type="text" class="form-control" id="tag" placeholder="بازیگر این صفحه از روایت ..." />
+            </div>
+            <div class="col-3">
+              <label for="txtCase">Case</label>
+              <input type="text" lang="en" dir="ltr" class="form-control" id="txtCase" placeholder="case..." value="{{page.slug}}"/>
+            </div>
+            <div class="col-3">
+              <label for="txtSlug" dir="ltr" >ُSlug</label>
+              <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" placeholder="slug..." />
+            </div>
+
+          </div>
+          <div class="row admin bg-light">
+            <div class="col">
+              <label for="mediaCredit">منبع تصویر</label>
+              <input type="text" class="form-control" id="mediaCredit" placeholder="برای مثال ایسنا" />
+            </div>
+            <div class="col-6">
+              <label for="mediaUrl">آدرس اینترنتی منبع تصویر</label>
+              <input type="text" lang="en" dir="ltr" class="form-control" id="mediaUrl" placeholder="http://examp.le/4rah.jpg" />
+            </div>
+          </div>
+          <div class="row admin bg-light pb-2">
+            <div class="col">
+              <label for="mediaCaption">توضیح تصویر</label>
+              <input type="text" class="form-control" id="mediaCaption" placeholder="کپشن مدیا..." />
+            </div>
+            <div class="col">
+              <label for="mediaCaptionUrl">منبع توضیح تصویر</label>
+              <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" placeholder="Media Caption URL..." />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+                <input type="button" id="bt" value="Save data to file" class="btn btn-primary btn-lg btn-block" onclick="saveFile()" />
+            </div>
+        </div>
+      </div>
+</div>
 <script type="text/javascript">
   $(document).ready(function() {
-	var dataObject = {
-	timeline:
-	{
-		headline:"{{page.title}}",
-		type:"default",
-		text:"{{page.tlCoverTxt}}",
-		asset: {
-			media:"{{page.tlImgCover}}",
-			credit:"{{page.tlImgCredit}}",
-			caption:"{{page.tlImgCaption}}"
-		},
-		date: [
-    {% for post in filtered_posts %}
-			{
-				startDate:"{{post.startDate}}",
-				endDate:"{{post.endDate}}",
-				headline:"{{post.title}}",
-				text:"{{post.text}}",
-				tag:"{{post.tag}}",
-				classname:"optionaluniqueclassnamecanbeaddedhere",
-				asset: {
-					media:"{{post.media}}",
-					thumbnail:"{{post.thumbnail}}",
-					credit:"{% if post.mediaCreditUrl %}<a href='{{post.mediaCreditUrl}}' target='blank'>{%endif%}{{post.mediaCredit}}{% if post.mediaCreditUrl %}</a>{%endif%}",
-					caption:"{% if post.mediaCaptionUrl %}<a href='{{post.mediaCaptionUrl}}' target='blank'>{%endif%}{{post.mediaCaption}}{% if post.mediaCaptionUrl %}</a>{%endif%}"
-				}
-			},
-      {% endfor %}
-		],
-		era: [
-			{
-				startDate:"2011,12,10",
-				endDate:"2011,12,11",
-				headline:"Headline Goes Here",
-				text:"<p>Body text goes here, some HTML is OK</p>",
-				tag:"This is Optional"
-			}
+    if (urlParams.get('go') == "add") {
+      $('#formAddEvent').show();
+      $('#txtSlug').val(makeid(4));
+    } else {
+      $('#formAddEvent').hide();
+      var dataObject = {
+    	timeline:
+    	{
+    		headline:"{{page.title}}",
+    		type:"default",
+    		text:"{{page.tlCoverTxt}}",
+    		asset: {
+    			media:"{{page.tlImgCover}}",
+    			credit:"{{page.tlImgCredit}}",
+    			caption:"{{page.tlImgCaption}}"
+    		},
+    		date: [
+        {% for post in filtered_posts %}
+    			{
+    				startDate:"{{post.startDate}}",
+    				endDate:"{{post.endDate}}",
+    				headline:"{{post.title}}",
+    				text:"{{post.text}}",
+    				tag:"{{post.tag}}",
+    				classname:"optionaluniqueclassnamecanbeaddedhere",
+    				asset: {
+    					media:"{{post.media}}",
+    					thumbnail:"{{post.thumbnail}}",
+    					credit:"{% if post.mediaCreditUrl %}<a href='{{post.mediaCreditUrl}}' target='blank'>{%endif%}{{post.mediaCredit}}{% if post.mediaCreditUrl %}</a>{%endif%}",
+    					caption:"{% if post.mediaCaptionUrl %}<a href='{{post.mediaCaptionUrl}}' target='blank'>{%endif%}{{post.mediaCaption}}{% if post.mediaCaptionUrl %}</a>{%endif%}"
+    				}
+    			},
+          {% endfor %}
+    		],
+    		era: [
+    			{
+    				startDate:"2011,12,10",
+    				endDate:"2011,12,11",
+    				headline:"Headline Goes Here",
+    				text:"<p>Body text goes here, some HTML is OK</p>",
+    				tag:"This is Optional"
+    			}
 
-		]
-	}
-};
-  createStoryJS({
-    type:		'timeline',
-    height:		'100%',
-    lang:				'fa',							//OPTIONAL LANGUAGE
-    source:		dataObject,
-    embed_id:	'case-timeline',
-    hash_bookmark:		true,
-    font:				'IRANSans'				//OPTIONAL FONT
+    		]
+    	}
+    };
+      createStoryJS({
+        type:		'timeline',
+        height:		'100%',
+        lang:				'fa',							//OPTIONAL LANGUAGE
+        source:		dataObject,
+        embed_id:	'case-timeline',
+        hash_bookmark:		true,
+        font:				'IRANSans'				//OPTIONAL FONT
+      });
+
+    }
+    var smap = L.map('sideMap').setView([{{page.location}}], 17);
+    Thunderforest_TransportDark.addTo(smap);
+    $.getJSON("/assets/{{page.slug}}/json/bound.geojson",function(data){
+      // add GeoJSON layer to the map once the file is loaded
+      jsonLayer = L.geoJson(data, {
+
+        // style: {color: "#999", weight: 2, fillColor: "#00ad79", fillOpacity: .6},
+      })
+      jsonLayer.addTo(smap);
+      smap.fitBounds(jsonLayer.getBounds(), {
+        padding: [10, 10]
+      });
+    });
   });
-var smap = L.map('sideMap').setView([{{page.location}}], 17);
-Thunderforest_TransportDark.addTo(smap);
-$.getJSON("/assets/{{page.slug}}/json/bound.geojson",function(data){
-                // add GeoJSON layer to the map once the file is loaded
-                jsonLayer = L.geoJson(data, {
-
-                    // style: {color: "#999", weight: 2, fillColor: "#00ad79", fillOpacity: .6},
-                })
-               jsonLayer.addTo(smap);
-               smap.fitBounds(jsonLayer.getBounds(), {
-            padding: [10, 10]
-        });
-            });
-          });
 </script>
