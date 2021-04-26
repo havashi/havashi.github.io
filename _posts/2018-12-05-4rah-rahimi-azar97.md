@@ -1,9 +1,11 @@
---- 
-case: 4rah 
-title: اتمام حجت پلیس؛ نرده های چهارراه ولیعصر برداشته نمی‌شود 
-startDate: "1397,09,14" 
-endDate: "1397,09,14" 
-tag: پلیس 
+---
+published: true
+case: 4rah
+title: اتمام حجت پلیس؛ نرده های چهارراه ولیعصر برداشته نمی‌شود
+startDate: "1397,09,14"
+endDate: "1397,09,14"
+tag: پلیس
+mediaType: image
 media:  
 mediaCredit:  
 mediaCreditUrl:  

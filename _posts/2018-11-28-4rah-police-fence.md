@@ -1,9 +1,11 @@
---- 
-case: 4rah 
-title: جوش زدن نرده‌ها توسط پلیس 
-startDate: "1397,09,07" 
-endDate: "1397,09,07" 
-tag: پلیس 
+---
+published: true
+case: 4rah
+title: جوش زدن نرده‌ها توسط پلیس
+startDate: "1397,09,07"
+endDate: "1397,09,07"
+tag: پلیس
+mediaType: image
 media:  
 mediaCredit:  
 mediaCreditUrl:  

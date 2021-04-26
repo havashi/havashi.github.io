@@ -1,9 +1,11 @@
 ---
+published: true
 case: 4rah
-title: جلسه باهمستان با رحیمی رئیس پلیس تهران 
+title: جلسه باهمستان با رحیمی رئیس پلیس تهران
 startDate: "1397,11,05"
 endDate: "1397,11,05"
 tag: باهمستان
+mediaType: image
 media:  
 mediaCredit:  
 mediaCreditUrl:  

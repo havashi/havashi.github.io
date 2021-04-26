@@ -10,7 +10,9 @@
       function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
         if (profile.getEmail() == '7ayebi@gmail.com') {
-          localStorage.setItem('adminSignedIn', '1' )
+          localStorage.setItem('adminSignedIn', 1 )
+        } else {
+          localStorage.setItem('adminSignedIn', 0 )          
         }
       }
     </script>

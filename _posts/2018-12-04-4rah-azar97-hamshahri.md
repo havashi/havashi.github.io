@@ -1,10 +1,12 @@
 ---
+published: true
 case: 4rah
 title: گزارش همشهری - نرده‌های چهاراه ولیعصر، سمبل خودرو محوری تهران همچنان پابرجاست
 startDate: "1397,09,13"
 endDate: "1397,09,13"
 tag: شهرداری
-media: <video controls><source src='/assets/cases/4rah/hamshahri-azar97.MP4' type='video/mp4'>مرورگر شما از پخش‌کننده ویدئو پشتیبانی نمی‌کند</video>
+mediaType: video
+media: /assets/cases/4rah/hamshahri-azar97.MP4
 mediaCredit: کانال روزنامه همشهری  
 mediaCreditUrl: https://t.me/hamshahrinews/34313
 mediaCaption: گزارش تصویری همشهری

@@ -1,9 +1,11 @@
---- 
-case: 4rah 
-title: تذکر حجت نظری در صحن علنی شورای شهر 
-startDate: "1397,09,13" 
-endDate: "1397,09,13" 
-tag: شهرداری 
+---
+published: true
+case: 4rah
+title: تذکر حجت نظری در صحن علنی شورای شهر
+startDate: "1397,09,13"
+endDate: "1397,09,13"
+tag: شهرداری
+mediaType: image
 media:  
 mediaCredit:  
 mediaCreditUrl:  

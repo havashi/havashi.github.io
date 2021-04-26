@@ -2,7 +2,8 @@
 layout: default
 sidebar: 'no'
 ---
-{% assign filtered_posts = site.posts | where: 'case', page.slug  %}
+{% assign case_posts = site.posts | where: 'case', page.slug  %}
+{% assign filtered_posts = case_posts | where: 'published', 'true'  %}
 {% assign post_count = filtered_posts.size %}
 <div id="case-timeline"></div>
 <div id="formAddEvent" style="display:none;">
@@ -166,15 +167,23 @@ sidebar: 'no'
     		},
     		date: [
         {% for post in filtered_posts %}
+        {% case post.mediaType %}
+          {% when 'audio' %}
+            {% capture  postMedia %}<audio controls><source src='{{post.media}}' type='audio/{{post.media | split:"." | last }}'>مرورگر شما از پخش‌کننده صدا پشتیبانی نمی‌کند.</audio>{% endcapture %}
+          {% when 'video' %}
+            {% capture  postMedia %}<video controls><source src='{{post.media}}' type='video/{{post.media | split:"." | last }}'>مرورگر شما از پخش‌کننده صدا پشتیبانی نمی‌کند.</video>{% endcapture %}
+          {% else %}
+             {% assign postMedia = post.media %}
+        {% endcase %}
     			{
     				startDate:"{{post.startDate}}",
     				endDate:"{{post.endDate}}",
     				headline:"{{post.title}}",
-    				text:"{{post.text}}",
+    				text:"{{post.text}} <a href='{{post.url}}'>ویرایش</a>",
     				tag:"{{post.tag}}",
     				classname:"optionaluniqueclassnamecanbeaddedhere",
     				asset: {
-    					media:"{{post.media}}",
+    					media:"{{postMedia}}",
     					thumbnail:"{{post.thumbnail}}",
     					credit:"{% if post.mediaCreditUrl %}<a href='{{post.mediaCreditUrl}}' target='blank'>{%endif%}{{post.mediaCredit}}{% if post.mediaCreditUrl %}</a>{%endif%}",
     					caption:"{% if post.mediaCaptionUrl %}<a href='{{post.mediaCaptionUrl}}' target='blank'>{%endif%}{{post.mediaCaption}}{% if post.mediaCaptionUrl %}</a>{%endif%}"

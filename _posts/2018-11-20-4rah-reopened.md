@@ -1,10 +1,12 @@
 ---
+published: true
 case: 4rah
 title: بازگشایی موقت چهارراه ولیعصر
 startDate: "1397,08,29"
 endDate: "1397,08,29"
 tag: باهمستان
-media: /assets/cases/4rah/4rah-reopen-poster.png 
+mediaType: image
+media: /assets/cases/4rah/4rah-reopen-poster.png
 mediaCredit: توئیتر باهمستان
 mediaCreditUrl: https://twitter.com/Bahamestan/status/1064827823758761984
 mediaCaption: پوستر اطلاعیه

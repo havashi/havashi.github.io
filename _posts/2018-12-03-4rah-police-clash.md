@@ -1,9 +1,11 @@
---- 
-case: 4rah 
-title: ممانعت پلیس از برگزاری رویداد شهر بدون مانع در چهارراه ولیعصر 
-startDate: "1397,09,12" 
-endDate: "1397,09,12" 
-tag: پلیس 
+---
+published: true
+case: 4rah
+title: ممانعت پلیس از برگزاری رویداد شهر بدون مانع در چهارراه ولیعصر
+startDate: "1397,09,12"
+endDate: "1397,09,12"
+tag: پلیس
+mediaType: image
 media:  
 mediaCredit:  
 mediaCreditUrl:  

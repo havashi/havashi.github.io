@@ -1,10 +1,12 @@
 ---
+published: true
 case: 4rah
 title: بحث بین مشاور معاونت حمل و نقل و ترافیک شهرداری و رئیس پلیس راهور تهران در برنامه پارک شهر رادیو تهران
 startDate: "1397,09,12"
 endDate: "1397,09,12"
 tag: پلیس
-media: <audio controls><source src='/assets/cases/4rah/pirhosseinloo-mehmandar.ogg' 'type=audio/ogg'>مرورگر شما از پخش‌کننده صدا پشتیبانی نمی‌کند.</audio>  
+mediaType: audio
+media: /assets/cases/4rah/pirhosseinloo-mehmandar.ogg
 mediaCredit: رادیو تهران
 mediaCreditUrl:  
 mediaCaption:  

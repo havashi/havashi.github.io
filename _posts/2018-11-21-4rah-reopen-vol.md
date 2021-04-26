@@ -1,9 +1,11 @@
 ---
+published: true
 case: 4rah
 title: حضور داوطلبان در چهارراه برای جلب حمایت مردم از بازگشایی دایمی
 startDate: "1397,08,30"
 endDate:  "1397,09,03"
 tag: باهمستان
+mediaType: image
 media: /assets/cases/4rah/reopen-vols.jpg
 mediaCredit: باهمستان
 mediaCreditUrl:  

@@ -1,9 +1,11 @@
 ---
+published: true
 case: 4rah
 title: برگزاری رویداد شهر بدون مانع در چهارراه ولیعصر برای دومین سال
 startDate: "1397,09,12"
 endDate: "1397,09,12"
 tag: باهمستان
+mediaType: image
 media: /assets/cases/4rah/azar97event.gif
 mediaCredit: پوستر بازچرخ
 mediaCreditUrl: https://t.me/bazcharkh/463

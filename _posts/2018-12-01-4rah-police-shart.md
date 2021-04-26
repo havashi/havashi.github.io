@@ -1,9 +1,11 @@
---- 
-case: 4rah 
-title: اعلام  شرط بازگشایی نرده‌های چهارراه ولیعصر از طرف پلیس 
-startDate: "1397,09,10" 
-endDate: "1397,09,10" 
-tag: پلیس 
+---
+published: true
+case: 4rah
+title: اعلام  شرط بازگشایی نرده‌های چهارراه ولیعصر از طرف پلیس
+startDate: "1397,09,10"
+endDate: "1397,09,10"
+tag: پلیس
+mediaType: image
 media:  
 mediaCredit:  
 mediaCreditUrl:  
