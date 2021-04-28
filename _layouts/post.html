@@ -3,59 +3,6 @@ layout: default
 ---
 <script type="text/javascript">
 
-$(document).ready(function() {
-  var to, from;
-to = $("#endDate").persianDatepicker({
-  initialValue: false,
-  responsive: true,
-  format: 'L',
-  autoClose: true,
-  altField: '#endDateU',
-  calendar:{
-    persian:{
-      showHint: true
-    },
-    gregorian:{
-      showHint: true
-    }
-  },
-  onSelect: function (unix) {
-        to.touched = true;
-        if (from && from.options && from.options.maxDate != unix) {
-            var cachedValue = from.getState().selected.unixDate;
-            from.options = {maxDate: unix};
-            if (from.touched) {
-                from.setDate(cachedValue);
-            }
-        }
-    }
-});
-from = $("#startDate").persianDatepicker({
-  initialValue: false,
-  responsive: true,
-  format: 'L',
-  autoClose: true,
-  altField: '#startDateU',
-  calendar:{
-    persian:{
-      showHint: true
-    },
-    gregorian:{
-      showHint: true
-    }
-  },
-  onSelect: function (unix) {
-        from.touched = true;
-        if (to && to.options && to.options.minDate != unix) {
-            var cachedValue = to.getState().selected.unixDate;
-            to.options = {minDate: unix};
-            if (to.touched) {
-                to.setDate(cachedValue);
-            }
-        }
-    }
-});
-});
 </script>
     <div class="container pt-3">
       <div class="row mt-5">
@@ -72,19 +19,25 @@ from = $("#startDate").persianDatepicker({
           <div class="row">
             <div class="col form-group">
               <label for="startDate">از تاریخ</label>
-              <input type="text" class="form-control" id="startDate" value="{{page.startDate}}"placeholder="تاریخ شروع..." />
+              <input type="text" class="form-control" id="startDate" placeholder="تاریخ شروع..." />
               <input type="hidden" id="startDateU" />
             </div>
             <div class="col form-group">
               <label for="endDate">تا تاریخ</label>
-              <input type="text" class="form-control" id="endDate" value="{{page.endDate}}" placeholder="در صورتی که اتفاق در یک روز بوده مشابه تاریخ شروع در غیر اینصورت تاریخ پایان اتفاق" />
+              <input type="text" class="form-control" id="endDate" value="" placeholder="در صورتی که اتفاق در یک روز بوده مشابه تاریخ شروع در غیر اینصورت تاریخ پایان اتفاق" />
               <input type="hidden" id="endDateU" />
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="col form-group">
+              <label for="text">توضیح</label>
+              <textarea id="text" name="msg" class="form-control" placeholder="شرح مختصری درباره این صفحه از روایت بنویسید..." style="height:100px">{{page.text}}</textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
               <div class="form-group">
-                <label for="mediaType">نوع</label>
+                <label for="mediaType">نوع پیوست</label>
                 <select class="form-control" id="mediaType">
                   <option {% if page.mediaType == 'image' %} selected='selected' {% endif %} value="image">عکس</option>
                   <option {% if page.mediaType == 'video' %} selected='selected' {% endif %} value="video">ویدئو</option>
@@ -92,20 +45,26 @@ from = $("#startDate").persianDatepicker({
                 </select>
               </div>
             </div>
-            <div class="col-8 git" id="featureImg">
+            <div class="col-6 git" id="featureImg">
               <div class="form-group">
                 <label>فایل پیوست</label>
                 <input type="file" class="uploadImg" id="file" >
-                <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature image" data-path="assets/img/posts/" data-name="postSlug">بارگذاری</a>
+                <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{page.case}}/" data-name="{{page.slug}}">بارگذاری</a>
                 <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;">نمایش</a>
                 <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" style="display: none;">حذف</a>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col form-group">
-              <label for="text">توضیح</label>
-                <textarea id="text" name="msg" class="form-control" placeholder="شرح مختصری درباره این صفحه از روایت بنویسید..." style="height:100px">{{page.text}}</textarea>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="mediaCaption">توضیح فایل پیوست</label>
+                <input type="text" class="form-control" id="mediaCaption" value="{{page.mediaCaption}}" placeholder="کپشن مدیا..." />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <label for="mediaCaptionUrl">منبع فایل پیوست</label>
+              <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" value="{{page.mediaCaptionUrl}}" placeholder="Media Caption URL..." />
             </div>
           </div>
           <div class="row guest">
@@ -140,26 +99,6 @@ from = $("#startDate").persianDatepicker({
             </div>
 
           </div>
-          <div class="row admin bg-light">
-            <div class="col">
-              <label for="mediaCredit">منبع تصویر</label>
-              <input type="text" class="form-control" id="mediaCredit" value="{{page.mediaCredit}}" placeholder="برای مثال ایسنا" />
-            </div>
-            <div class="col-6">
-              <label for="mediaUrl">آدرس اینترنتی منبع تصویر</label>
-              <input type="text" lang="en" dir="ltr" class="form-control" id="mediaUrl" value="{{page.mediaUrl}}" placeholder="http://examp.le/4rah.jpg" />
-            </div>
-          </div>
-          <div class="row admin bg-light pb-2">
-            <div class="col">
-              <label for="mediaCaption">توضیح تصویر</label>
-              <input type="text" class="form-control" id="mediaCaption" value="{{page.mediaCaption}}" placeholder="کپشن مدیا..." />
-            </div>
-            <div class="col">
-              <label for="mediaCaptionUrl">منبع توضیح تصویر</label>
-              <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" value="{{page.mediaCaptionUrl}}" placeholder="Media Caption URL..." />
-            </div>
-          </div>
           <div class="row mt-2">
             <div class="col">
                 <input type="submit" id="bt" value="Save data to file" class="btn btn-primary btn-lg btn-block" />
@@ -169,6 +108,19 @@ from = $("#startDate").persianDatepicker({
     </div>
 <script type="text/javascript">
   $(document).ready(function () {
+    if (author == 'guest') {
+
+    }
+
+
+    $('.image-delete').click(function () {
+      $(this).hide();
+      $(this).siblings('.uploadImg').show();
+      $(this).siblings('.uploadedImg').hide();
+      $(this).siblings('.btn-success').attr('href', '');
+    })
+
+    $('#startDate').trigger('change');
     {% if page.media %}
       $('.uploadedImg').show();
       $('.uploadImg').hide();
@@ -176,5 +128,58 @@ from = $("#startDate").persianDatepicker({
     $('.uploadedImg').hide();
     $('.uploadImg').show();
     {% endif %}
+    var to, from;
+  to = $("#endDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#endDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          to.touched = true;
+          if (from && from.options && from.options.maxDate != unix) {
+              var cachedValue = from.getState().selected.unixDate;
+              from.options = {maxDate: unix};
+              if (from.touched) {
+                  from.setDate(cachedValue);
+              }
+          }
+      }
+  });
+  from = $("#startDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#startDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          from.touched = true;
+          if (to && to.options && to.options.minDate != unix) {
+              to.options = {minDate: unix};
+              to.setDate(unix);
+          }
+      }
+  });
+  var fromDate = new persianDate([{{page.startDate}}]);
+  var toDate = new persianDate([{{page.endDate}}]);
+  from.setDate(fromDate);
+  to.setDate(toDate);
+
   })
 </script>

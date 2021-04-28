@@ -1,8 +1,10 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 if (localStorage.getItem('adminSignedIn') == 1) {
+  var author = 'admin';
   $('.guest *').attr('required', false);
 } else {
+  var author = 'guest';
   $('.admin').empty()
 }
 function makeid(length) {
