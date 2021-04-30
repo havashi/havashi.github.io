@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>{{ site.title }} {% if page.title %} | {{ page.title }}{% endif %}</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome/css/all.css">
@@ -28,6 +27,7 @@
     maxZoom: 22
   });
   </script>
+  <script src="/assets/js/custom.js"></script>
   </head>
 <body>
 <div id="wrapper" {%if page.sidebar == 'yes' %} class="toggled" {%endif%}>
@@ -36,12 +36,10 @@
   {% include navigation.html %}
 </header>
 {% include sidebar.html %}
-
   <div id="page-content-wrapper" class="p-0">
     {{ content }}
   </div>
 </div>
-<script src="/assets/js/custom.js"></script>
 <script src="https://alitayebi.com/havashi/dist.js?v=1.01" defer async></script>
 </body>
 </html>
