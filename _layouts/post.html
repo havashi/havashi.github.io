@@ -104,6 +104,17 @@ layout: default
       </form>
     </div>
 <script type="text/javascript">
+  var currentPost = {
+    'title': '{{page.title}}',
+    'case': '{{page.case}}',
+    'tag': '{{page.tag}}',
+    'mediaType': '{{page.mediaType}}',
+    'media': '{{page.media}}',
+    'mediaCaption': '{{page.mediaCaption}}',
+    'mediaCaptionUrl': '{{page.mediaCaptionUrl}}',
+    'slug': '{{page.slug}}'
+  };
+  sessionStorage.setItem("currentPost", JSON.stringify(currentPost));
   $(document).ready(function () {
     if (authorRole == 'guest') {
       var postCase = '{{page.case}}';
