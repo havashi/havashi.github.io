@@ -1,0 +1,208 @@
+---
+layout: default
+---
+{% assign orgPost = site.posts | where: 'slug', page.postSlug | first %}
+{% assign cas = site.cases | where: 'slug', page.case | first %}
+    <div class="container pt-3">
+      <div class="row mt-5">
+        <h3 class="mt-5 text-secondary">پیشنهاد ویرایش </h3>
+      </div>
+      <div class="row">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a class="black-text" href="/"><i class="fas fa-home"></i></a></li>
+            <li class="breadcrumb-item"><a class="black-text" href="{{cas.url}}">{{cas.title}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{page.title}}</li>
+          </ol>
+        </nav>
+      </div>
+        <!--Add few elements to the form-->
+        <form id="editPost" action="index.html" method="post">
+          <div class="row">
+            <div class="col form-group">
+              <label for="title">عنوان</label>
+              <input type="text" class="form-control" value="{{page.title}}" data-toggle="tooltip" data-placement="top" title="Tooltip on top" autofocus id="title" placeholder="کوتاه و گویا و به فارسی ..."  />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="startDate">از تاریخ: {{orgPost.startDate}}</label>
+              <input type="text" class="form-control" id="startDate" placeholder="تاریخ شروع..." />
+              <input type="hidden" id="startDateU" />
+            </div>
+            <div class="col form-group">
+              <label for="endDate">تا تاریخ: {{orgPost.endDate}}</label>
+              <input type="text" class="form-control" id="endDate" value="" placeholder="در صورتی که اتفاق در یک روز بوده مشابه تاریخ شروع در غیر اینصورت تاریخ پایان اتفاق" />
+              <input type="hidden" id="endDateU" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="text">توضیح</label>
+              <p class="small">{{orgPost.text}}</p>
+              <textarea id="text" name="msg" class="form-control" placeholder="شرح مختصری درباره این صفحه از روایت بنویسید..." style="height:100px">{{page.text}}</textarea>
+            </div>
+          </div>
+          <div class="row guest">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="guestName">نام و نام خانوادگی</label>
+                <input type="text" class="form-control" name="guestName" id="guestName" value="{{page.guestName}}" required>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="guestEmail">ایمیل</label>
+                <input type="email" class="form-control" name="guestEmail" id="guestEmail" value="{{page.guestEmail}}" required>
+              </div>
+            </div>
+          </div>
+          <div class="row admin bg-light p-2">
+            <h3>تنظیمات ویراستاری</h3>
+          </div>
+          <div class="row admin bg-light">
+            <div class="col-6 form-group">
+              <label for="tag">برچسب</label>
+              <input type="text" class="form-control" id="tag" value="{{page.tag}}" placeholder="بازیگر این صفحه از روایت ..." />
+            </div>
+            <div class="col-3">
+              <label for="txtCase">Case</label>
+              <input type="text" lang="en" dir="ltr" class="form-control" value="{{page.case}}" id="txtCase" placeholder="case..." value="{{page.slug}}"/>
+            </div>
+            <div class="col-3">
+              <label for="txtSlug" dir="ltr" >ُSlug</label>
+              <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" value="{{page.slug}}" placeholder="slug..." />
+            </div>
+
+          </div>
+          <div class="row admin bg-light">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="mediaType">نوع پیوست</label>
+                <select class="form-control" id="mediaType">
+                  <option {% if page.mediaType == 'image' %} selected='selected' {% endif %} value="image">عکس</option>
+                  <option {% if page.mediaType == 'video' %} selected='selected' {% endif %} value="video">ویدئو</option>
+                  <option {% if page.mediaType == 'audio' %} selected='selected' {% endif %} value="audio">فایل صوتی</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 " id="featureImg">
+              <div class="form-group git">
+                <label>فایل پیوست</label>
+                <input type="file" class="uploadImg" id="file" >
+                <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{page.case}}/" data-name="{{page.slug}}">بارگذاری</a>
+                <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;">نمایش</a>
+                <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" style="display: none;">حذف</a>
+              </div>
+            </div>
+          </div>
+          <div class="row admin bg-light">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="mediaCaption">توضیح فایل پیوست</label>
+                <input type="text" class="form-control" id="mediaCaption" value="{{page.mediaCaption}}" placeholder="کپشن مدیا..." />
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <label for="mediaCaptionUrl">منبع فایل پیوست</label>
+              <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" value="{{page.mediaCaptionUrl}}" placeholder="Media Caption URL..." />
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+                <input type="submit" id="bt" value="انتشار" class="btn btn-primary btn-lg btn-block" />
+            </div>
+        </div>
+      </form>
+    </div>
+<script type="text/javascript">
+  var currentPost = {
+    'title': '{{page.title}}',
+    'case': '{{page.case}}',
+    'tag': '{{page.tag}}',
+    'mediaType': '{{page.mediaType}}',
+    'media': '{{page.media}}',
+    'mediaCaption': '{{page.mediaCaption}}',
+    'mediaCaptionUrl': '{{page.mediaCaptionUrl}}',
+    'slug': '{{page.slug}}'
+  };
+  sessionStorage.setItem("currentPost", JSON.stringify(currentPost));
+  $(document).ready(function () {
+    if (authorRole == 'guest') {
+      var postCase = '{{page.case}}';
+      var postSlug = '{{page.slug}}';
+      var postTag = '{{page.tag}}';
+      var postMediaType = '{{page.mediaType}}';
+      var postMedia = '{{page.media}}';
+      var postMediaCaption = '{{page.mediaCaption}}';
+      var postMediaCaptionUrl = '{{page.mediaCaptionUrl}}';
+    }
+    $('.image-delete').click(function () {
+      $(this).hide();
+      $(this).siblings('.uploadImg').show();
+      $(this).siblings('.uploadedImg').hide();
+      $(this).siblings('.btn-success').attr('href', '');
+    })
+    {% if page.media %}
+      $('.uploadedImg').show();
+      $('.uploadImg').hide();
+    {% else %}
+    $('.uploadedImg').hide();
+    $('.uploadImg').show();
+    {% endif %}
+    var to, from;
+  to = $("#endDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#endDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          to.touched = true;
+          if (from && from.options && from.options.maxDate != unix) {
+              var cachedValue = from.getState().selected.unixDate;
+              from.options = {maxDate: unix};
+              if (from.touched) {
+                  from.setDate(cachedValue);
+              }
+          }
+      }
+  });
+  from = $("#startDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#startDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          from.touched = true;
+          if (to && to.options && to.options.minDate != unix) {
+              to.options = {minDate: unix};
+              to.setDate(unix);
+          }
+      }
+  });
+  var fromDate = new persianDate([{{page.startDate}}]);
+  var toDate = new persianDate([{{page.endDate}}]);
+  from.setDate(fromDate);
+  to.setDate(toDate);
+
+  })
+
+</script>

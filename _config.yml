@@ -58,6 +58,9 @@ collections:
   cases:
     output: true
     permalink: /:name
+  drafts:
+    output: true
+    permalink: drafts/:slug
 defaults:
   - scope:
       path: ""
@@ -65,6 +68,11 @@ defaults:
     values:
       layout: "case"
       sidebar: "yes"
+  - scope:
+      path: ""
+      type: "drafts"
+    values:
+      layout: "review"
   - scope:
       path: ""
       type: "posts"
