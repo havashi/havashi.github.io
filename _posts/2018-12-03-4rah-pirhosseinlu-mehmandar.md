@@ -6,10 +6,8 @@ endDate: "1397,09,12"
 tag: پلیس
 mediaType: audio
 media: /assets/cases/4rah/pirhosseinloo-mehmandar.ogg
-mediaCredit: رادیو تهران
-mediaCreditUrl:  
-mediaCaption:  
+mediaCaption: رادیو تهران
 mediaCaptionUrl:  
-text: "سردار مهماندار: در شهر، سواره بر پیاده ترجیح دارد!<br>
-پیرحسین‌لو: این نگاه خودرومحور در جهان منسوخ شده است"
 ---
+سردار مهماندار: در شهر، سواره بر پیاده ترجیح دارد!
+پیرحسین‌لو: این نگاه خودرومحور در جهان منسوخ شده است

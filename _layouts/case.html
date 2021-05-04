@@ -179,13 +179,12 @@ sidebar: 'no'
     				startDate:"{{post.startDate}}",
     				endDate:"{{post.endDate}}",
     				headline:"{{post.title}}",
-    				text:"{{post.text}} <a href='{{post.url}}'>ویرایش</a>",
+    				text:"{{post.content | strip_html | strip_newlines}} <a href='{{post.url}}' target='_blank'>ویرایش</a>",
     				tag:"{{post.tag}}",
     				classname:"optionaluniqueclassnamecanbeaddedhere",
     				asset: {
     					media:"{{postMedia}}",
     					thumbnail:"{{post.thumbnail}}",
-    					credit:"{% if post.mediaCreditUrl %}<a href='{{post.mediaCreditUrl}}' target='blank'>{%endif%}{{post.mediaCredit}}{% if post.mediaCreditUrl %}</a>{%endif%}",
     					caption:"{% if post.mediaCaptionUrl %}<a href='{{post.mediaCaptionUrl}}' target='blank'>{%endif%}{{post.mediaCaption}}{% if post.mediaCaptionUrl %}</a>{%endif%}"
     				}
     			},

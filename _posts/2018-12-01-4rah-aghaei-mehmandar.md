@@ -4,11 +4,9 @@ title: حضور معاون حمل و نقل ترافیک شهرداری و رئ�
 startDate: "1397,09,10"
 endDate: "1397,09,10"
 tag: شهرداری
-mediaType: image
+mediaType:
 media:  
-mediaCredit:  
-mediaCreditUrl:  
 mediaCaption:  
 mediaCaptionUrl:  
-text: "لینک خبر https://t.me/Bahamestan/498"
 ---
+لینک خبر https://t.me/Bahamestan/498

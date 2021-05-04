@@ -18,12 +18,14 @@ title: پیشنهادهای دریافتی
         		</thead>
         		<tbody>
               {% for post in site.drafts %}
+              {% if post.draftPublish == 0 %}
         			<tr>
         				<td data-title="صفحه"><a href="{{post.url}}">{{post.title}}</a></td>
         				<td data-title="روایت">{% for case in post.case %}{% assign cas = site.cases | where: 'slug', case | first %}{% if cas %}{{cas.title}}{% endif %}{% endfor %}</td>
         				<td data-title="پیشنهاد دهنده" class="numeric">{{post.guestName}}</td>
         				<td data-title="تاریخ" class="numeric persianDate" data-timestamp="{{post.editDate}}"></td>
         			</tr>
+              {% endif %}
               {% endfor %}
         		</tbody>
         	</table>
