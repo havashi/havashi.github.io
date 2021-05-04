@@ -12,7 +12,7 @@ mediaCaptionUrl: /assets/ut/img/slide-rrk-mosavabe.jpg
 text: "از متن مصوبه:  بر اساس این مصوبه، حقوق مالکانۀ مردم محدودۀ پیرامونی دانشگاه تهران به آن‌ها بازخواهد گشت و کمیسیون‌های ماده ۵ نیز می‌بایست از تصویب و بررسی هرگونه طرح توسعه کالبدیِ دانشگاه‌های واقع در بافت شهری تا ابلاغ دستورالعمل ذکرشده در متن مصوبه، خودداری نمایند."
 guestName: Emad
 guestEmail: tayebie@yahoo.com
-editDate: 1620096216346
+editDate: 1620105971682
 postSlug: ut-mosavabe
 draftPublish: 1
 ---
