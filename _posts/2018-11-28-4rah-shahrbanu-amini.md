@@ -1,5 +1,4 @@
 ---
-published: true
 case: 4rah
 title: حمایت شهربانو امانی از بازگشایی دایمی چهارراه
 startDate: "1397,09,07"

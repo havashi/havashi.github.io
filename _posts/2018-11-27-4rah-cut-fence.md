@@ -1,5 +1,4 @@
 ---
-published: true
 case: 4rah
 title: بریدن نرده‌های چهارراه ولیعصر توسط شهرداری
 startDate: "1397,09,06"

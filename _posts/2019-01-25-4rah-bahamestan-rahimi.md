@@ -1,5 +1,4 @@
 ---
-published: true
 case: 4rah
 title: جلسه باهمستان با رحیمی رئیس پلیس تهران
 startDate: "1397,11,05"

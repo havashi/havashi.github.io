@@ -1,5 +1,4 @@
 ---
-published: true
 case: 4rah
 title: بازگشایی موقت چهارراه ولیعصر
 startDate: "1397,08,29"

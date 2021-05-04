@@ -1,5 +1,4 @@
 ---
-published: true
 case: 4rah
 title: جوش زدن نرده‌ها توسط پلیس
 startDate: "1397,09,07"

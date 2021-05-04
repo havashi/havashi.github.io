@@ -3,7 +3,7 @@ layout: default
 sidebar: 'no'
 ---
 {% assign case_posts = site.posts | where: 'case', page.slug  %}
-{% assign filtered_posts = case_posts | where: 'published', 'true'  %}
+{% assign filtered_posts = case_posts %}
 {% assign post_count = filtered_posts.size %}
 <div id="case-timeline"></div>
 <div id="formAddEvent" style="display:none;">

@@ -1,5 +1,4 @@
 ---
-published: true
 case: 4rah
 title: تذکر حجت نظری در صحن علنی شورای شهر
 startDate: "1397,09,13"
