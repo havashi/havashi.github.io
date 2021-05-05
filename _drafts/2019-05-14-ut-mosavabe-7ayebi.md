@@ -11,7 +11,7 @@ mediaCaption: تصویر مصوبه شورای عالی معماری و شهرس
 mediaCaptionUrl: /assets/ut/img/slide-rrk-mosavabe.jpg 
 guestName: Ali Taybi
 guestEmail: 7ayebi@gmail.com
-editDate: 1620225634
+editDate: 1620226007
 postSlug: ut-mosavabe
 draftPublish: 1
 ---
