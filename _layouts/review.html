@@ -260,7 +260,6 @@ layout: default
     $($('input[name=startDate].orgPost').closest('.input-group').find("input[type=hidden]")).val(orgPostStartDateU.format('X')+'000')
     var orgPostEndDateU = new persianDate([{{orgPost.startDate}}]);
     $($('input[name=endDate].orgPost').closest('.input-group').find("input[type=hidden]")).val(orgPostEndDateU.format('X')+'000')
-    console.log($($('input[name=text]:checked').closest('.input-group').find("textarea")).html());
     if (authorRole == 'guest') {
       var postCase = '{{page.case}}';
       var postSlug = '{{page.slug}}';
