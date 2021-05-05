@@ -129,7 +129,7 @@ layout: default
                   </select>
                 </div>
                 <div class="input-group-append">
-                  <a href="{{orgPost.media}}"  data-path="{{orgPost.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" {% unless orgPost.media %} style="display: none;" {% endunless %}>نمایش</a>
+                  <a href="{{orgPost.media}}"  data-path="{{orgPost.media}}" class="image-link btn btn-success btn-sm" target="_blank" {% unless orgPost.media %} style="display: none;" {% endunless %}>نمایش</a>
                 </div>
               </div>
               {% endif %}
@@ -149,7 +149,7 @@ layout: default
                   <label class="custom-file-label" for="file">Choose file</label>
                 </div>
                 <div class="input-group-append git">
-                  <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{page.case}}/" data-name="{{page.slug}}" {% if page.media %} style="display: none;" {% endif %}>بارگذاری</a>
+                  <button class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{page.case}}/" data-name="{{page.slug}}" {% if page.media %} style="display: none;" {% endif %}><span class="spinner-border spinner-border-sm" style="display:none;"></span> بارگذاری</button>
                   <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" {% unless page.media %} style="display: none;" {% endunless %} data-path="{{page.media}}">نمایش</a>
                   <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" {% unless page.media %} style="display: none;" {% endunless %}>حذف</a>
                 </div>
