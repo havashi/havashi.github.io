@@ -114,6 +114,20 @@ sidebar: 'no'
               <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" placeholder="Media Caption URL..." />
             </div>
           </div>
+          <div class="row guest">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="guestName">نام و نام خانوادگی</label>
+                <input type="text" class="form-control" name="guestName" id="guestName" value="{{page.guestName}}" required>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="guestEmail">ایمیل</label>
+                <input type="email" class="form-control" name="guestEmail" id="guestEmail" value="{{page.guestEmail}}" required>
+              </div>
+            </div>
+          </div>          
           <div class="row admin bg-light p-2">
             <h3>تنظیمات ویراستاری</h3>
           </div>
