@@ -94,23 +94,34 @@ sidebar: 'no'
                 <textarea id="text" name="msg" class="form-control" placeholder="شرح مختصری درباره این صفحه از روایت بنویسید..." style="height:100px"></textarea>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12 git" id="featureImg">
-              <label>تصویر شاخص</label>
-              <input type="file" class="uploadImg" id="file" >
-              <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature image" data-path="assets/img/posts/" data-name="postSlug">بارگذاری</a>
-              <a href="" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;">نمایش</a>
-              <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger" style="display: none;">حذف</a>
-              <input type="text" class="uploadedImg" name="imgCaption" id="imgCaption" placeholder="توضیح و منبع عکس ..." value="" style="display: none; width:400px">
+          <div class="row admin bg-light">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label for="mediaType">نوع فایل پیوست</label>
+                <select class="form-control" id="mediaType">
+                  <option value="image">عکس</option>
+                  <option value="video">ویدئو</option>
+                  <option value="audio">فایل صوتی</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6 " id="featureImg">
+              <div class="form-group git">
+                <label>فایل پیوست</label>
+                <input type="file" class="uploadImg" id="file" accept="image/*">
+                <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{page.case}}/" data-name="{{page.slug}}">بارگذاری</a>
+                <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;">نمایش</a>
+                <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" style="display: none;">حذف</a>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <label for="mediaCaption">توضیح تصویر</label>
+              <label for="mediaCaption">توضیح فایل پیوست</label>
               <input type="text" class="form-control" id="mediaCaption" placeholder="کپشن مدیا..." />
             </div>
             <div class="col">
-              <label for="mediaCaptionUrl">منبع توضیح تصویر</label>
+              <label for="mediaCaptionUrl">منبع فایل پیوست</label>
               <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" placeholder="Media Caption URL..." />
             </div>
           </div>
@@ -127,7 +138,7 @@ sidebar: 'no'
                 <input type="email" class="form-control" name="guestEmail" id="guestEmail" value="{{page.guestEmail}}" required>
               </div>
             </div>
-          </div>          
+          </div>
           <div class="row admin bg-light p-2">
             <h3>تنظیمات ویراستاری</h3>
           </div>
@@ -156,6 +167,18 @@ sidebar: 'no'
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
+    var timed = new Date();
+    console.log(timed.getFullYear())
+    $('#mediaType').change(function () {
+      if ($(this).val() == 'image') {
+        $('#file').attr('accept', 'image/*');
+      } else if ($(this).val() == 'video') {
+        console.log('test');
+        $('#file').attr('accept', 'video/*');
+      } else if ($(this).val() == 'audio') {
+        $('#file').attr('accept', 'audio/*');
+      }
+    });
     var currentPost = {
       'case': '{{page.slug}}',
       'postSlug': '{{page.slug}}-'+makeid(4)
