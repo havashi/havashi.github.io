@@ -110,7 +110,7 @@ sidebar: 'no'
                 <label>فایل پیوست</label>
                 <input type="file" class="uploadImg" id="file" accept="image/*">
                 <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg">بارگذاری</a>
-                <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;">نمایش</a>
+                <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;" data-path="">نمایش</a>
                 <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" style="display: none;">حذف</a>
               </div>
             </div>
@@ -167,8 +167,6 @@ sidebar: 'no'
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
-    var timed = new Date();
-    console.log(timed.getFullYear())
     $('#mediaType').change(function () {
       if ($(this).val() == 'image') {
         $('#file').attr('accept', 'image/*');

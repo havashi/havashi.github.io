@@ -80,4 +80,9 @@ $(document).ready(function(){
           $(this).text(postDate.toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' }));
         })
 
+        $("input[type=file].custom-file-input").change(function (){
+          console.log('dsd');
+          var fileName = $(this).val().split('\\').pop();
+          $(this).siblings('label').html(fileName);
+        });
     });
