@@ -10,8 +10,9 @@ title: پیشنهادهای دریافتی
             <table class="col-md-12 table table-bordered table-striped ">
         		<thead class="">
         			<tr>
+                <th>وضعیت</th>
         				<th>عنوان صفحه</th>
-        				<th>روایت</th>
+                <th>روایت</th>
         				<th>پیشنهاد دهنده</th>
         				<th>تاریخ</th>
         			</tr>
@@ -19,9 +20,12 @@ title: پیشنهادهای دریافتی
         		<tbody>
               {% for post in site.drafts %}
               {% if post.draftPublish == 0 %}
+              {% assign orgPost = site.posts | where: 'slug', post.postSlug | first %}
+              {% if orgPost %}{% assign status = 'ویرایش' %}{% else %}{% assign status = 'جدید' %}{% endif %}
         			<tr>
-        				<td data-title="صفحه"><a href="{{post.url}}">{{post.title}}</a></td>
-        				<td data-title="روایت">{% for case in post.case %}{% assign cas = site.cases | where: 'slug', case | first %}{% if cas %}{{cas.title}}{% endif %}{% endfor %}</td>
+                <td data-title="وضعیت">{{status}}</td>
+                <td data-title="صفحه"><a href="{{post.url}}">{{post.title}}</a></td>
+        				<td data-title="روایت">{% assign cas = site.cases | where: 'slug', post.case | first %}{% if cas %}<a href="{{cas.url}}">{{cas.title}}</a>{% endif %}</td>
         				<td data-title="پیشنهاد دهنده" class="numeric">{{post.guestName}}</td>
         				<td data-title="تاریخ" class="numeric persianDate" data-timestamp="{{post.editDate}}"></td>
         			</tr>

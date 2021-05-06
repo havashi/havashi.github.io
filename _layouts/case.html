@@ -95,23 +95,28 @@ sidebar: 'no'
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-12">
               <div class="form-group">
-                <label for="mediaType">نوع فایل پیوست</label>
-                <select class="form-control" id="mediaType">
-                  <option value="image">عکس</option>
-                  <option value="video">ویدئو</option>
-                  <option value="audio">فایل صوتی</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-6 " id="featureImg">
-              <div class="form-group git">
                 <label>فایل پیوست</label>
-                <input type="file" class="uploadImg" id="file" accept="image/*">
-                <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg">بارگذاری</a>
-                <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;" data-path="">نمایش</a>
-                <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" style="display: none;">حذف</a>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <select class="form-control mediaType">
+                      <option value="">نوع فایل ...</option>
+                      <option value="image">عکس</option>
+                      <option value="video">ویدئو</option>
+                      <option value="audio">فایل صوتی</option>
+                    </select>
+                  </div>
+                  <div class="upload custom-file uploadImg" style="display:none;">
+                    <input type="file" class="uploadImg custom-file-input" id="file" accept="image/*">
+                    <label class="custom-file-label" for="file" accept="image/*">Choose file</label>
+                  </div>
+                  <div class="upload input-group-append git" style="display:none;">
+                    <a href="javascript:void(0)" class="uploadGit uploadImg btn btn-secondary btn-sm" id="uploadFImg">بارگذاری</a>
+                    <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;" data-path="">نمایش</a>
+                    <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" style="display: none;">حذف</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -167,14 +172,18 @@ sidebar: 'no'
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#mediaType').change(function () {
+    $('.mediaType').change(function () {
       if ($(this).val() == 'image') {
+        $('.upload').show();
         $('#file').attr('accept', 'image/*');
       } else if ($(this).val() == 'video') {
-        console.log('test');
+        $('.upload').show();
         $('#file').attr('accept', 'video/*');
       } else if ($(this).val() == 'audio') {
+        $('.upload').show();
         $('#file').attr('accept', 'audio/*');
+      } else {
+        $('.upload').hide();
       }
     });
     var currentPost = {

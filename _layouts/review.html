@@ -122,7 +122,7 @@ layout: default
                   <input type="radio" class="orgPost" name="mediaFile" aria-label="Radio button for following text input">
                   </div>
                   <select class="form-control mediaType" disabled>
-                    <option value=""></option>
+                    <option {% unless orgPost.mediaType %}selected='selected'{% endunless %} value=""></option>
                     <option {% if orgPost.mediaType == 'image' %} selected='selected' {% endif %} value="image">عکس</option>
                     <option {% if orgPost.mediaType == 'video' %} selected='selected' {% endif %} value="video">ویدئو</option>
                     <option {% if orgPost.mediaType == 'audio' %} selected='selected' {% endif %} value="audio">فایل صوتی</option>
@@ -139,22 +139,22 @@ layout: default
                   <input type="radio" name="mediaFile" checked aria-label="Radio button for following text input">
                   </div>
                   <select class="form-control mediaType">
+                    <option value="">نوع فایل ...</option>
                     <option {% if page.mediaType == 'image' %} selected='selected' {% endif %} value="image">عکس</option>
                     <option {% if page.mediaType == 'video' %} selected='selected' {% endif %} value="video">ویدئو</option>
                     <option {% if page.mediaType == 'audio' %} selected='selected' {% endif %} value="audio">فایل صوتی</option>
                   </select>
                 </div>
-                <div class="custom-file uploadImg">
+                <div class="upload custom-file uploadImg">
                   <input type="file" class="uploadImg custom-file-input" id="file">
                   <label class="custom-file-label" for="file">Choose file</label>
                 </div>
-                <div class="input-group-append git">
-                  <a href="javascript:void(0)" class="uploadGit upload uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{page.case}}/" data-name="{{page.slug}}" {% if page.media %} style="display: none;" {% endif %}><span class="spinner-border spinner-border-sm" style="display:none;"></span> بارگذاری</a>
+                <div class="upload input-group-append git">
+                  <a href="javascript:void(0)" class="uploadGit uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{page.case}}/" data-name="{{page.slug}}" {% if page.media %} style="display: none;" {% endif %}><span class="spinner-border spinner-border-sm" style="display:none;"></span> بارگذاری</a>
                   <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" {% unless page.media %} style="display: none;" {% endunless %} data-path="{{page.media}}">نمایش</a>
                   <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" {% unless page.media %} style="display: none;" {% endunless %}>حذف</a>
                 </div>
               </div>
-
             </div>
           </div>
           <div class="row">
@@ -233,7 +233,6 @@ layout: default
               <label for="txtSlug" dir="ltr" >ُSlug</label>
               <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" value="{{page.postSlug}}" placeholder="slug..." />
             </div>
-
           </div>
           <div class="row mt-2">
             <div class="col">
@@ -256,6 +255,21 @@ layout: default
   };
   sessionStorage.setItem("currentPost", JSON.stringify(currentPost));
   $(document).ready(function () {
+    $('.mediaType').change(function () {
+      if ($(this).val() == 'image') {
+        $('.upload').show();
+        $('#file').attr('accept', 'image/*');
+      } else if ($(this).val() == 'video') {
+        $('.upload').show();
+        $('#file').attr('accept', 'video/*');
+      } else if ($(this).val() == 'audio') {
+        $('.upload').show();
+        $('#file').attr('accept', 'audio/*');
+      } else {
+        $('.upload').hide();
+      }
+    });
+    $('.mediaType').trigger('change');
     var orgPostStartDateU = new persianDate([{{orgPost.startDate}}]);
     $($('input[name=startDate].orgPost').closest('.input-group').find("input[type=hidden]")).val(orgPostStartDateU.format('X')+'000')
     var orgPostEndDateU = new persianDate([{{orgPost.startDate}}]);
