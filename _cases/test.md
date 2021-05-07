@@ -1,13 +1,13 @@
---- 
-draftPublish: 1 
-title: تست پست جدید 
-slug: test 
-categories: test 
-coverImg: /assets/uploads/2021/4/4/455-536x354.jpg 
-location: 35.694807014605175, 51.37756347656251 
-bounds: '{"_southWest":{"lat":35.673892404894445,"lng":51.329927444458015},"_northEast":{"lat":35.71571614090516,"lng":51.425199508667}}' 
-geoJSONTag: '{' 
-editDate: 1620381074 
+---
+draftPublish: 1
+title: تست پست جدید
+slug: test
+categories: test
+coverImg: /assets/uploads/2021/4/4/455-536x354.jpg
+location: 35.694807014605175, 51.37756347656251
+bounds: '{"_southWest":{"lat":35.673892404894445,"lng":51.329927444458015},"_northEast":{"lat":35.71571614090516,"lng":51.425199508667}}'
+geoJSONTag: '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[[[51.376534,35.695696],[51.376662,35.693901],[51.378556,35.694129],[51.37847,35.694913],[51.376534,35.695696]]]}}]}' 
+editDate: 1620381074
 guestName:  
 guestEmail:  
 ---
