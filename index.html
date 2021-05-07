@@ -11,7 +11,7 @@ sidebar: 'no'
   {% for case in site.cases %}
   L.marker([{{case.location}}]).addTo(map).on('click', function(e) {
 		$("#geoTitle").text("{{case.title}}");
-		$("#geoDes").text("{{case.tlCoverTxt}}");
+		$("#geoDes").text("{{case.content | strip_html | strip_newlines | truncatewords: 20 }}");
     $("#geoImg").attr("src", "{{case.coverImg}}");
     $("#geoUrl").attr("href", "{{case.url}}");
     $("#wrapper").addClass("toggled");

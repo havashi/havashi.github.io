@@ -1,0 +1,38 @@
+---
+layout: default
+title: پیشنهادهای دریافتی
+slug: updates
+permalink: /cases/updates/
+---
+<section class="mt-5 pt-3 admin">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <div id="no-more-tables">
+            <table class="col-md-12 table table-bordered table-striped ">
+        		<thead class="">
+        			<tr>
+                <th>وضعیت</th>
+        				<th>عنوان صفحه</th>
+                <th>روایت</th>
+        				<th>پیشنهاد دهنده</th>
+        				<th>تاریخ</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+              {% for case in site.cases %}
+              {% if case.draftPublish == 0 %}
+        			<tr>
+        				<td data-title="روایت"><a href="{{case.url}}?go=edit">{{case.title}}</a></td>
+        				<td data-title="پیشنهاد دهنده" class="numeric">{{case.guestName}}</td>
+        				<td data-title="تاریخ" class="numeric persianDate" data-timestamp="{{case.editDate}}"></td>
+        			</tr>
+              {% endif %}
+              {% endfor %}
+        		</tbody>
+        	</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

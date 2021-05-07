@@ -6,7 +6,7 @@
     <img id="geoImg" class="card-img-top" src="{{page.coverImg}}" alt="Card image cap">
     <div class="card-body">
       <h5 id="geoTitle" class="card-title">{{page.title}}</h5>
-      <p id="geoDes" class="card-text">{{page.tlCoverTxt}}</p>
+      <p id="geoDes" class="card-text">{{page.content | strip_html | strip_newlines | truncatewords: 20 }}</p>
       {% if page.url == "/" %}
       <a href="#" id="geoUrl" class="btn btn-primary">مشاهده روایت</a>
       {% else %}

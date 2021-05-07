@@ -6,6 +6,15 @@ sidebar: 'no'
 {% assign filtered_posts = case_posts %}
 {% assign post_count = filtered_posts.size %}
 <div id="case-timeline"></div>
+<div id="formEditCase" style="display:none;">
+  <div class="container pt-5">
+    <div class="row pt-5 mt-5">
+        <h3>ویرایش روایت {{page.title}}</h3>
+    </div>
+    {% assign case = page %}
+    {% include addCase.html %}
+  </div>
+</div>
 <div id="formAddEvent" style="display:none;">
   <script type="text/javascript">
 
@@ -194,9 +203,14 @@ sidebar: 'no'
 
     if (urlParams.get('go') == "add") {
       $('#formAddEvent').show();
+      $('#formEditCase').hide();
       $('#txtSlug').val('{{page.slug}}-'+ makeid(4));
+    } else if (urlParams.get('go') == "edit") {
+      $('#formAddEvent').hide();
+      $('#formEditCase').show();
     } else {
       $('#formAddEvent').hide();
+      $('#formEditCase').hide();
       var dataObject = {
     	timeline:
     	{
