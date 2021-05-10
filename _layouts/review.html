@@ -241,6 +241,7 @@ layout: default
               </select>
             </div>
           </div>
+          <a href="javascript:void(0)" class="gitMdUpload">save</a>
           <div class="row mt-2">
             <div class="col">
                 <button type="submit" id="bt" value="Submit" class="btn btn-primary btn-lg btn-block"><span class="spinner-border" style="display:none;"></span> <span id="submitTxt">Save</span></button>
@@ -414,7 +415,7 @@ function afterLogin(user) {
             saveMarkdown(draft, draftFileName, draftFilepath);
           } else {
             $(document).ready(function () {
-              saveMarkdown(draft, draftFileName, draftFilepath);
+              $('.gitMdUpload').data('md', {file: draft, fileName: draftFileName, postFilepath: draftFilepath}).trigger('click');
             })
           }
   })
