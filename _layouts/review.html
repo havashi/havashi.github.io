@@ -365,7 +365,7 @@ function afterLogin(user) {
     editDate = editDate.toString().slice(0,-3);
     var draftPath = '_drafts/';
     var postPath = '_posts/';
-    var draftSlug = {{page.slug}};
+    var draftSlug = '{{page.slug}}';
     var endDateFa = new persianDate(parseInt(endDateU));
     endDateFa.formatPersian = false;
     var startDateFa = new persianDate(parseInt(startDateU));
