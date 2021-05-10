@@ -1,15 +1,17 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-var authorRole;
-$(document).ready(function () {
-  if (localStorage.getItem('adminSignedIn') == 1) {
-    var authorRole = 'admin';
-    $('.guest *').attr('required', false);
-  } else {
-    var authorRole = 'guest';
-    $('.admin').empty()
-  }
-})
+function readMore(string, maxWords) {
+    var strippedString = $("<p>" + string + "</p>").text().trim();
+    var array = strippedString.split(" ");
+    var wordCount = array.length;
+    var string = array.splice(0, maxWords).join(" ");
+
+    if(wordCount > maxWords) {
+        string += "...";
+    }
+
+        return string ;
+}
 function makeid(length) {
     var result           = [];
     var characters       = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';

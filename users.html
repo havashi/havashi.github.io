@@ -1,0 +1,77 @@
+---
+layout: default
+title: کاربران سایت
+---
+<section class="mt-5 pt-3">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <div id="no-more-tables">
+            <table class="col-md-12 table table-bordered table-striped ">
+        		<thead class="">
+        			<tr>
+                <th>نام</th>
+        				<th>نام کاربری</th>
+        				<th>نقش</th>
+        			</tr>
+        		</thead>
+        		<tbody id="usersList">
+        		</tbody>
+        	</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+  function afterLogin(user) {
+    var accessToken;
+    if (user.profile) {
+      var userProfile = user.profile;
+      if (userProfile.hasOwnProperty('sec')) {
+        var accessToken = user.profile.sec;
+      }
+    }
+    if (accessToken) {
+      fetch('https://v1.userbase.com/v1/admin/apps/'+appID+'/users', {
+          headers: { 'Authorization': 'Bearer '+ accessToken }
+      })
+      .then(res=>res.json())
+      .then(res => printUserList(res.users));
+      $(document).on('change','.user-role',function(){
+        $(this).siblings('.spinner-border').show();
+        var userID = $(this).attr('name');
+        fetch('https://v1.userbase.com/v1/admin/users/'+userID, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer '+ accessToken },
+            body: JSON.stringify({
+                protectedProfile: {"role": this.value}
+            })
+        }).then($(this).siblings('.spinner-border').hide());
+     });
+   } else {
+     window.location = "/";
+   }
+  }
+    function printUserList(users) {
+      for (var i = 0; i < users.length; i++) {
+        var fullname = '-';
+        var role = 'user';
+        var username = users[i].username;
+        if (users[i].profile) {
+          var profile = users[i].profile
+          if (profile.hasOwnProperty("fullname")) {
+            fullname = profile.fullname;
+          }
+        }
+        if (users[i].protectedProfile) {
+          var protectedProfile = users[i].protectedProfile;
+          if (protectedProfile.hasOwnProperty("role")) {
+            role = users[i].protectedProfile.role;
+          }
+        }
+        $('#usersList').append('<tr><td data-title="نام">'+fullname+'</td><td data-title="نام‌‌کاربری">'+users[i].username+'</td><td data-title="نقش"><select class="user-role" name="'+users[i].userId+'"><option value="user">کاربر</option><option value="editor">ویراستار</option></select><div class="spinner-border spinner-border-sm" role="status" style="display:none;"><span class="sr-only">Loading...</span> </div></td></tr>');
+        $('select[name="'+users[i].userId+'"]').val(role);
+      }
+    }
+</script>

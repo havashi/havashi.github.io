@@ -3,21 +3,21 @@ layout: default
 ---
 {% assign orgPost = site.posts | where: 'slug', page.postSlug | first %}
 {% assign cas = site.cases | where: 'slug', page.case | first %}
-    <div class="container pt-3">
+    <div class="user container pt-3">
       <div class="row mt-5">
-        <h3 class="mt-5 text-secondary">پیشنهاد ویرایش </h3>
+        <h3 class="mt-5 text-secondary">پیشنهاد {% if orgPost %}ویرایش صفحه{% else%}صفحه جدید{% endif %}</h3>
       </div>
       <div class="row">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a class="black-text" href="/"><i class="fas fa-home"></i></a></li>
             <li class="breadcrumb-item"><a class="black-text" href="{{cas.url}}">{{cas.title}}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{orgPost.title}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{% if orgPost %}{{orgPost.title}}{% else%}{{page.title}}{% endif %}</li>
           </ol>
         </nav>
       </div>
         <!--Add few elements to the form-->
-        <form id="editPost" action="index.html" method="post" data-action="draftPublish">
+        <form id="editPost" action="/" method="post" data-action="draftPublish">
           <div class="row">
             <div class="col form-group">
               <label for="title">عنوان</label>
@@ -217,11 +217,11 @@ layout: default
               </div>
             </div>
           </div>
-          <div class="row admin bg-light p-2">
+          <div class="row admin editor bg-light p-2">
             <h3>تنظیمات ویراستاری</h3>
           </div>
           <div class="row admin bg-light">
-            <div class="col-6 form-group">
+            <div class="col-3 form-group">
               <label for="tag">برچسب</label>
               <input type="text" class="form-control" id="tag" value="{{page.tag}}" placeholder="بازیگر این صفحه از روایت ..." />
             </div>
@@ -233,27 +233,26 @@ layout: default
               <label for="txtSlug" dir="ltr" >ُSlug</label>
               <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" value="{{page.postSlug}}" placeholder="slug..." />
             </div>
+            <div class="col-3 form-group">
+              <label for="tag">اقدام</label>
+              <select class="form-control" name="action">
+                <option value="Save">ذخیره</option>
+                <option value="Publish">انتشار</option>
+              </select>
+            </div>
           </div>
           <div class="row mt-2">
             <div class="col">
-                <button type="submit" id="bt" value="Submit" class="btn btn-primary btn-lg btn-block"><span class="spinner-border" style="display:none;"></span> انتشار</button>
+                <button type="submit" id="bt" value="Submit" class="btn btn-primary btn-lg btn-block"><span class="spinner-border" style="display:none;"></span> <span id="submitTxt">Save</span></button>
             </div>
         </div>
       </form>
     </div>
 <script type="text/javascript">
-  var currentPost = {
-    'title': '{{page.title}}',
-    'case': '{{page.case}}',
-    'tag': '{{page.tag}}',
-    'mediaType': '{{page.mediaType}}',
-    'media': '{{page.media}}',
-    'mediaCaption': '{{page.mediaCaption}}',
-    'mediaCaptionUrl': '{{page.mediaCaptionUrl}}',
-    'slug': '{{page.slug}}',
-    'postSlug': '{{page.postSlug}}'
-  };
-  sessionStorage.setItem("currentPost", JSON.stringify(currentPost));
+  $('select[name=action]').change(function () {
+    $('#submitTxt').text($(this).val())
+  })
+function afterLogin(user) {
   $(document).ready(function () {
     $('.mediaType').change(function () {
       if ($(this).val() == 'image') {
@@ -274,15 +273,6 @@ layout: default
     $($('input[name=startDate].orgPost').closest('.input-group').find("input[type=hidden]")).val(orgPostStartDateU.format('X')+'000')
     var orgPostEndDateU = new persianDate([{{orgPost.startDate}}]);
     $($('input[name=endDate].orgPost').closest('.input-group').find("input[type=hidden]")).val(orgPostEndDateU.format('X')+'000')
-    if (authorRole == 'guest') {
-      var postCase = '{{page.case}}';
-      var postSlug = '{{page.slug}}';
-      var postTag = '{{page.tag}}';
-      var postMediaType = '{{page.mediaType}}';
-      var postMedia = '{{page.media}}';
-      var postMediaCaption = '{{page.mediaCaption}}';
-      var postMediaCaptionUrl = '{{page.mediaCaptionUrl}}';
-    }
     $('.image-delete').click(function () {
       $(this).hide();
       $('.uploadImg').show();
@@ -348,7 +338,92 @@ layout: default
   var toDate = new persianDate([{{page.endDate}}]);
   from.setDate(fromDate);
   to.setDate(toDate);
-
   })
-
+  $('#addCase').submit(function (event) {
+    event.preventDefault();
+    var submitBtn = $('button[type=submit]');
+    submitBtn.children('span').show();
+    submitBtn.attr('disabled', true);
+    if ($('select[name=action]').val() == 'Publish')) {
+      var draftPublish = 1;
+    } else {
+      var draftPublish = 0;
+    }
+    var title = $($('input[name=title]:checked').closest('.input-group').find("input[type=text]")).val();
+    var text = $($('input[name=text]:checked').closest('.input-group').find("textarea")).html();
+    var startDateU = $($('input[name=startDate]:checked').closest('.input-group').find("input[type=hidden]")).val();
+    var endDateU = $($('input[name=endDate]:checked').closest('.input-group').find("input[type=hidden]")).val();
+    var mediaType = $($('input[name=mediaFile]:checked').closest('.input-group').find("select")).val();
+    var media = $($('input[name=mediaFile]:checked').closest('.input-group').find(".image-link")).attr('data-path');
+    var mediaCaption = $($('input[name=mediaCaption]:checked').closest('.input-group').find("input[type=text]")).val();
+    var mediaCaptionUrl = $($('input[name=mediaCaptionUrl]:checked').closest('.input-group').find("input[type=text]")).val();
+    var guestSlug = guestEmail.split("@")[0];
+    var editDate= Date.now();
+    editDate = editDate.toString().slice(0,-3);
+    var draftPath = '_drafts/';
+    var postPath = '_posts/';
+    var draftSlug = {{page.slug}};
+    var endDateFa = new persianDate(parseInt(endDateU));
+    endDateFa.formatPersian = false;
+    var startDateFa = new persianDate(parseInt(startDateU));
+    startDateFa.formatPersian = false;
+    var startDateEn = new Date(parseInt(startDateU));
+    var draft =
+          '--- \r\n'  +
+          'case: ' + $('#txtCase').val() + ' \r\n' +
+          'title: ' +title + ' \r\n' +
+          'slug: ' +draftSlug + ' \r\n' +
+          'startDate: "' + startDateFa.format("YYYY,MM,DD") + '" \r\n' +
+          'endDate: "' + endDateFa.format("YYYY,MM,DD")  + '" \r\n' +
+          'tag: ' + $('#tag').val() + ' \r\n' +
+          'mediaType: ' + mediaType + ' \r\n' +
+          'media: ' + media + ' \r\n' +
+          'mediaCaption: ' + mediaCaption + ' \r\n' +
+          'mediaCaptionUrl: ' + mediaCaptionUrl + ' \r\n' +
+          'guestName: ' + $('#guestName').val() + ' \r\n' +
+          'guestEmail: ' + $('#guestEmail').val() + ' \r\n' +
+          'editDate: ' + editDate + ' \r\n' +
+          'postSlug: ' + $('#txtSlug').val() + ' \r\n' +
+          'draftPublish: ' + draftPublish + ' \r\n' +
+          '---'+ '\r\n' +
+          text;
+    var post =
+          '--- \r\n'  +
+          'case: ' + Case + ' \r\n' +
+          'title: ' +title + ' \r\n' +
+          'slug: ' +postSlug + ' \r\n' +
+          'startDate: "' + startDateFa.format("YYYY,MM,DD") + '" \r\n' +
+          'endDate: "' + endDateFa.format("YYYY,MM,DD")  + '" \r\n' +
+          'tag: ' + tag + ' \r\n' +
+          'mediaType: ' + mediaType + ' \r\n' +
+          'media: ' + media + ' \r\n' +
+          'mediaCaption: ' + mediaCaption + ' \r\n' +
+          'mediaCaptionUrl: ' + mediaCaptionUrl + ' \r\n' +
+          '---'+ '\r\n' +
+          text;
+          var postFileName = startDateEn.toISOString().split("T")[0]+'-'+postSlug+'.md';	   // The file to save the data.
+          var postFilepath = postPath+postFileName;
+          var draftFileName = startDateEn.toISOString().split("T")[0]+'-'+draftSlug+'.md';	   // The file to save the data.
+          var draftFilepath = draftPath+draftFileName;
+          if ($('select[name=action]').val() == 'Publish')) {
+            saveMarkdown(post, postFileName, postFilepath);
+            saveMarkdown(draft, draftFileName, draftFilepath);
+          } else {
+            saveMarkdown(draft, draftFileName, draftFilepath);
+          }
+  })
+}
+function afterSaveMd() {
+  submitBtn.children('span').hide();
+  submitBtn.attr('disabled', false);
+}
+function afterFailMd(err) {
+  console.error(err);
+  alert('Something went wrong. Please, try again.');
+  submitBtn.children('span').hide();
+  submitBtn.attr('disabled', false);
+}
+function guest() {
+  $('.user').append('<div class="alert alert-danger" role="alert">فقط کاربران به این بخش دسترسی دارند.</div>')
+}
 </script>
