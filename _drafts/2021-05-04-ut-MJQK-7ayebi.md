@@ -9,10 +9,10 @@ mediaType:
 media:  
 mediaCaption: لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ 
 mediaCaptionUrl: http://havashi.org/ut?go=add 
-guestName: علی طیبی
-guestEmail: 7ayebi@gmail.com
-editDate: 1620626405
-postSlug: ut-MJQK
-draftPublish: 1
+guestName: علی طیبی 
+guestEmail: 7ayebi@gmail.com 
+editDate: 1620633811 
+postSlug: ut-MJQK 
+draftPublish: 0 
 ---
 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
