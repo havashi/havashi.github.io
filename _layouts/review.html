@@ -360,6 +360,7 @@ function afterLogin(user) {
     var media = $($('input[name=mediaFile]:checked').closest('.input-group').find(".image-link")).attr('data-path');
     var mediaCaption = $($('input[name=mediaCaption]:checked').closest('.input-group').find("input[type=text]")).val();
     var mediaCaptionUrl = $($('input[name=mediaCaptionUrl]:checked').closest('.input-group').find("input[type=text]")).val();
+    var guestEmail = $('#guestEmail').val();
     var guestSlug = guestEmail.split("@")[0];
     var editDate= Date.now();
     editDate = editDate.toString().slice(0,-3);
