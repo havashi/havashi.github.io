@@ -393,19 +393,19 @@ function afterLogin(user) {
           text;
     var post =
           '--- \r\n'  +
-          'case: ' + Case + ' \r\n' +
+          'case: ' + $('#txtCase').val() + ' \r\n' +
           'title: ' +title + ' \r\n' +
-          'slug: ' +postSlug + ' \r\n' +
+          'slug: ' +$('#txtSlug').val() + ' \r\n' +
           'startDate: "' + startDateFa.format("YYYY,MM,DD") + '" \r\n' +
           'endDate: "' + endDateFa.format("YYYY,MM,DD")  + '" \r\n' +
-          'tag: ' + tag + ' \r\n' +
+          'tag: ' + $('#tag').val() + ' \r\n' +
           'mediaType: ' + mediaType + ' \r\n' +
           'media: ' + media + ' \r\n' +
           'mediaCaption: ' + mediaCaption + ' \r\n' +
           'mediaCaptionUrl: ' + mediaCaptionUrl + ' \r\n' +
           '---'+ '\r\n' +
           text;
-          var postFileName = startDateEn.toISOString().split("T")[0]+'-'+postSlug+'.md';	   // The file to save the data.
+          var postFileName = startDateEn.toISOString().split("T")[0]+'-'+$('#txtSlug').val()+'.md';	   // The file to save the data.
           var postFilepath = postPath+postFileName;
           var draftFileName = startDateEn.toISOString().split("T")[0]+'-'+draftSlug+'.md';	   // The file to save the data.
           var draftFilepath = draftPath+draftFileName;
@@ -413,7 +413,9 @@ function afterLogin(user) {
             saveMarkdown(post, postFileName, postFilepath);
             saveMarkdown(draft, draftFileName, draftFilepath);
           } else {
-            saveMarkdown(draft, draftFileName, draftFilepath);
+            $(document).ready(function () {
+              saveMarkdown(draft, draftFileName, draftFilepath);
+            })
           }
   })
 }
