@@ -251,7 +251,10 @@ layout: default
 <script type="text/javascript">
   $('select[name=action]').change(function () {
     $('#submitTxt').text($(this).val())
-  })
+  });
+  $('#editPost').submit(function (event) {
+    event.preventDefault();
+  });
 function afterLogin(user) {
   $(document).ready(function () {
     $('.mediaType').change(function () {
