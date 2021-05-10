@@ -11,7 +11,7 @@ mediaCaption: لورم ایپسوم متن ساختگی با تولید سادگ
 mediaCaptionUrl: http://havashi.org/ut?go=add 
 guestName: علی طیبی 
 guestEmail: 7ayebi@gmail.com 
-editDate: 1620635577 
+editDate: 1620637137 
 postSlug: ut-MJQK 
 draftPublish: 1 
 ---
