@@ -344,7 +344,7 @@ function afterLogin(user) {
     var submitBtn = $('button[type=submit]');
     submitBtn.children('span').show();
     submitBtn.attr('disabled', true);
-    if ($('select[name=action]').val() == 'Publish')) {
+    if ($('select[name=action]').val() == 'Publish') {
       var draftPublish = 1;
     } else {
       var draftPublish = 0;
@@ -405,7 +405,7 @@ function afterLogin(user) {
           var postFilepath = postPath+postFileName;
           var draftFileName = startDateEn.toISOString().split("T")[0]+'-'+draftSlug+'.md';	   // The file to save the data.
           var draftFilepath = draftPath+draftFileName;
-          if ($('select[name=action]').val() == 'Publish')) {
+          if ($('select[name=action]').val() == 'Publish') {
             saveMarkdown(post, postFileName, postFilepath);
             saveMarkdown(draft, draftFileName, draftFilepath);
           } else {
