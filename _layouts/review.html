@@ -415,7 +415,7 @@ function afterLogin(user) {
             saveMarkdown(draft, draftFileName, draftFilepath);
           } else {
             $(document).ready(function () {
-              $('.gitMdUpload').data('md', {file: draft, fileName: draftFileName, postFilepath: draftFilepath}).trigger('click');
+              $('.gitMdUpload').data('md', {file: draft, name: draftFileName, path: draftFilepath}).trigger('click');
             })
           }
   })
