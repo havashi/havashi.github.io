@@ -1,0 +1,108 @@
+---
+layout: default
+title: مشخصات کاربر
+permalink: /dashboard/profile/
+scripts: [userbase, login]
+---
+<div class="container pt-5">
+  <div class="row mt-5 pt-5">
+    <div class="col-12">
+      <h3>ویرایش مشخصات کاربری</h3>
+    </div>
+  </div>
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="black-text" href="/"><i class="fas fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a class="black-text" href="/dashboard">محیط کاربری</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{page.title}}</li>
+      </ol>
+    </nav>
+  </div>
+  <form id="updateProfile" action="/" method="post">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="userFullname">نام و نام خانوادگی</label>
+        <input type="text" name="userFullname" id="userFullname" class="form-control" value="" autocomplete="off">
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="userUsername">نام کاربری</label>
+        <input type="email" name="userUsername" id="userUsername" class="form-control" value="" dir="ltr" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="changePassword">
+        <label class="form-check-label" for="changePassword">
+          تغییر پسورد
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="passwordChange" style="display:none;">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="currentPassword">پسورد فعلی</label>
+        <input type="password" name="currentPassword" id="currentPassword" class="form-control" value="">
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="newPassword">پسورد جدید</label>
+        <input type="password" name="newPassword" id="newPassword" class="form-control" value="">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <input type="submit" name="submit" class="btn btn-block btn-primary" value="ثبت">
+    </div>
+  </div>
+  </form>
+</div>
+<script type="text/javascript">
+  function afterLogin(user) {
+    $('#userFullname').val(user.profile.fullname);
+    $('#userUsername').val(user.username);
+      $('#updateProfile').submit(function (e) {
+        e.preventDefault();
+        if ($('#changePassword').is(':checked')) {
+          userbase.updateUser({
+            currentPassword: $('#currentPassword').val(),
+            newPassword: $('#newPassword').val(),
+            profile: { fullname: $('#userFullname').val()}
+          }).then(() => {
+            $('.alert-success').show().text('پروفایل شما با موفقیت به‌‌روز شد.');
+          }).catch((e) => {
+            $('.alert-danger').show().text('پروفایل شما با موفقیت به‌‌روز شد.:'+e);
+          })
+        } else {
+          userbase.updateUser({
+            profile: { fullname: $('#userFullname').val() }
+          }).then(() => {
+            $('.alert-success').show().text('پروفایل شما با موفقیت به‌‌روز شد.');
+          }).catch((e) => {
+            $('.alert-danger').show().text('پروفایل شما با موفقیت به‌‌روز شد.:'+e);
+          })
+        }
+    })
+  }
+  function guest() {
+    window.location.replace('/login/');
+  }
+  $('#updateProfile').submit(function (e) {
+    e.preventDefault();
+  })
+  $('#changePassword').change(function () {
+    if ($(this).is(':checked')) {
+      $('#passwordChange').show();
+    } else {
+      $('#passwordChange').hide();
+    }
+  })
+</script>

@@ -5,6 +5,6 @@
 - name: روایات
   link: /stories
 - name: ارسال روایت
-  link: /send
+  link: /cases/add/
 - name: تماس
   link: /contact

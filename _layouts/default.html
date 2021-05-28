@@ -7,43 +7,42 @@
     <title>{{ site.title }} {% if page.title %} | {{ page.title }}{% endif %}</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome/css/all.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-    <link rel="stylesheet" href="/assets/css/pdp/persian-datepicker.css"/>
+    {% for pagescript in page.scripts %}{% assign script = site.data.scripts | where: 'name', pagescript | first %}{% if script.css %}
+    <link rel="stylesheet" href="{{script.css}}"/>
+    {% endif %}{% endfor %}
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script type="text/javascript" src="https://sdk.userbase.com/2/userbase.js"></script>
+    <link title="timeline-styles" rel="stylesheet"
+          href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+
+    <!-- 2 -->
+    <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/pdp/persian.date.js"></script>
-    <script src="/assets/js/pdp/persian-datepicker.js"></script>
-    <script src="/assets/js/jQuery.persianNumbers-1.0.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""></script>
-    <script src="/assets/js/leaflet.ajax.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
-	<script type="text/javascript" src="/assets/js/storyjs-embed.js"></script>
-  <script type="text/javascript">
-  var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey={apikey}', {
-    attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://twitter.com/alitayebi">Ali Tayebi</a> Havashi',
-    apikey: '48584cb50e384399b635995577038af7',
-    maxZoom: 22
-  });
-  </script>
-  <script src="https://alitayebi.com/havashi/dist.js?v=1.01" defer async></script>
-  <script src="/assets/js/login.js"></script>
-  <script src="/assets/js/custom.js"></script>
+    {% for pagescript in page.scripts %}{% assign script = site.data.scripts | where: 'name', pagescript | first %}{% if script.js %}
+    <script src="{{script.js}}"></script>
+    {% endif %}{% endfor %}
+    {% if page.scripts contains 'leaflet'%}
+    <script type="text/javascript">
+    var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey={apikey}', {
+      attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://twitter.com/alitayebi">Ali Tayebi</a> Havashi',
+      apikey: '48584cb50e384399b635995577038af7',
+      maxZoom: 18
+    });
+    </script>
+    {% endif %}
+    <script src="/assets/js/custom.js"></script>
   </head>
 <body>
-<div id="wrapper" {%if page.sidebar == 'yes' %} class="toggled" {%endif%}>
 <header>
-
+  {% if page.url == "/" %}
   {% include navigation.html %}
+  {% else %}
+  {% include navbar-pages.html %}
+  {% endif %}
 </header>
-{% include sidebar.html %}
-  <div id="page-content-wrapper" class="p-0">
-    {{ content }}
-  </div>
-</div>
+  {{ content }}
+{% include footer.html %}
+
+{% if page.github == 1 %}<script src="https://alitayebi.com/havashi/dist.js?v=1.01" defer async></script>{% endif %}
 </body>
 </html>

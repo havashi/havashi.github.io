@@ -10,15 +10,16 @@
       {% if page.url == "/" %}
       <a href="#" id="geoUrl" class="btn btn-primary">مشاهده روایت</a>
       {% else %}
-      <a href="?go=1#{{post_count}}" class="btn btn-primary"><i class="fas fa-step-forward"></i>  از انتها...</a>
-      <a href="?go=0#0" class="btn btn-primary">...از ابتدا  <i class="fas fa-step-backward"></i></a>
+      <a href="?go=1#{{post_count}}" class="btn btn-primary btn-sm"><i class="fas fa-step-forward"></i>  از انتها...</a>
+      <a href="?go=0#0" class="btn btn-primary btn-sm">...از ابتدا  <i class="fas fa-step-backward"></i></a>
       {% endif %}
 
     </div>
     {%if page.location%}
-    <div id="sideMap" class="card-footer text-muted" style="height: 300px;"></div>
+    <div id="sideMap" class="card-footer text-muted" style="height: 250px;"></div>
     <div class="card-footer p-0 bg-primary">
-      <a href="/" class="btn btn-primary btn-lg btn-block">بازگشت به نقشه اصلی</a>
+      <a href="/drafts/add?case={{page.slug}}" class="btn btn-sm btn-primary btn-lg btn-block">افزودن صفحه به روایت</a>
+      <a href="/" class="btn btn-sm btn-secondary btn-lg btn-block">بازگشت به نقشه اصلی</a>
     </div>
     {%endif%}
   </div>

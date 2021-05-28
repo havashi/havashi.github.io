@@ -1,0 +1,325 @@
+<form id="editPost" class="save-markdown" action="/" method="post" data-action="draftPublish">
+  <div class="row">
+    <div class="col form-group">
+      <label for="title">عنوان</label>
+      {% if orgPost %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+          <input type="radio" name="title" aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" class="form-control" disabled value="{{orgPost.title}}">
+      </div>
+      {% endif %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text{% unless orgPost %} d-none{% endunless %}">
+          <input type="radio" name="title" checked aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" class="form-control" value="{{post.title}}">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col form-group">
+      <label for="startDate">از تاریخ</label>
+      {% if orgPost %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+          <input type="radio" class="orgPost" name="startDate" aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" class="form-control" disabled value="{{orgPost.startDate}}">
+        <input type="hidden" name="" value="">
+      </div>
+      {% endif %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text{% unless orgPost %} d-none{% endunless %}">
+          <input type="radio" name="startDate" checked aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" id="startDate" class="form-control" value="">
+        <input type="hidden" id="startDateU"  value=""/>
+      </div>
+    </div>
+    <div class="col form-group">
+      <label for="endDate">تا تاریخ</label>
+      {% if orgPost %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+          <input type="radio" class="orgPost" name="endDate" aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" class="form-control" disabled value="{{orgPost.startDate}}">
+        <input type="hidden" name="" value="">
+      </div>
+      {% endif %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text{% unless orgPost %} d-none{% endunless %}">
+          <input type="radio" name="endDate" checked aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" id="endDate" class="form-control converUNIX" value="">
+        <input type="hidden" id="endDateU" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col form-group">
+      <label for="text">توضیح</label>
+      {% if orgPost %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+          <input type="radio" class="orgPost" name="text" aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <textarea class="form-control" disabled style="height:100px">{{orgPost.content | strip_html | strip_newlines}}</textarea>
+      </div>
+      {% endif %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text{% unless orgPost %} d-none{% endunless %}">
+          <input type="radio" name="text" checked aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <textarea class="form-control" style="height:100px">{{post.content | strip_html | strip_newlines}}</textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <label>فایل پیوست</label>
+      {% if orgPost %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+          <input type="radio" class="orgPost" name="mediaFile" aria-label="Radio button for following text input">
+          </div>
+          <select class="form-control mediaType" disabled>
+            <option {% unless orgPost.mediaType %}selected='selected'{% endunless %} value=""></option>
+            <option {% if orgPost.mediaType == 'image' %} selected='selected' {% endif %} value="image">عکس</option>
+            <option {% if orgPost.mediaType == 'video' %} selected='selected' {% endif %} value="video">ویدئو</option>
+            <option {% if orgPost.mediaType == 'audio' %} selected='selected' {% endif %} value="audio">فایل صوتی</option>
+          </select>
+        </div>
+        <div class="input-group-append">
+          <a href="{{orgPost.media}}"  data-path="{{orgPost.media}}" class="image-link btn btn-success btn-sm" target="_blank" {% unless orgPost.media %} style="display: none;" {% endunless %}>نمایش</a>
+        </div>
+      </div>
+      {% endif %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text{% unless orgPost %} d-none{% endunless %}">
+          <input type="radio" name="mediaFile" checked aria-label="Radio button for following text input">
+          </div>
+          <select class="form-control mediaType">
+            <option value="">نوع فایل ...</option>
+            <option {% if post.mediaType == 'image' %} selected='selected' {% endif %} value="image">عکس</option>
+            <option {% if post.mediaType == 'video' %} selected='selected' {% endif %} value="video">ویدئو</option>
+            <option {% if post.mediaType == 'audio' %} selected='selected' {% endif %} value="audio">فایل صوتی</option>
+          </select>
+        </div>
+        <div class="upload custom-file uploadImg">
+          <input type="file" class="uploadImg custom-file-input" id="file">
+          <label class="custom-file-label" for="file">Choose file</label>
+        </div>
+        <div class="upload input-group-append git">
+          <a href="javascript:void(0)" class="uploadGit uploadImg btn btn-secondary btn-sm" id="uploadFImg" data-commit="upload post feature media" data-path="assets/cases/{{post.case}}/" data-name="{{post.slug}}" {% if post.media %} style="display: none;" {% endif %}><span class="spinner-border spinner-border-sm" style="display:none;"></span> بارگذاری</a>
+          <a href="{{post.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" {% unless post.media %} style="display: none;" {% endunless %} data-path="{{post.media}}">نمایش</a>
+          <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" {% unless post.media %} style="display: none;" {% endunless %}>حذف</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="mediaCaption">توضیح فایل پیوست</label>
+        {% if orgPost %}
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+            <input type="radio" class="orgPost" name="mediaCaption" aria-label="Radio button for following text input">
+            </div>
+          </div>
+          <input type="text" class="form-control" disabled value="{{orgPost.mediaCaption}}">
+        </div>
+        {% endif %}
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text{% unless orgPost %} d-none{% endunless %}">
+            <input type="radio" name="mediaCaption" checked aria-label="Radio button for following text input">
+            </div>
+          </div>
+          <input type="text" class="form-control" value="{{post.mediaCaption}}">
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <label for="mediaCaptionUrl">منبع فایل پیوست</label>
+      {% if orgPost %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+          <input type="radio" class="orgPost" name="mediaCaptionUrl" aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" class="form-control" disabled value="{{orgPost.mediaCaptionUrl}}" lang="en" dir="ltr" >
+      </div>
+      {% endif %}
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text{% unless orgPost %} d-none{% endunless %}">
+          <input type="radio" name="mediaCaptionUrl" checked aria-label="Radio button for following text input">
+          </div>
+        </div>
+        <input type="text" class="form-control" value="{{post.mediaCaptionUrl}}" lang="en" dir="ltr" >
+      </div>
+    </div>
+  </div>
+  <div class="row guest">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="guestName">نام و نام خانوادگی</label>
+        <input type="text" class="form-control" name="guestName" id="guestName" value="{{post.guestName}}" required>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="guestEmail">ایمیل</label>
+        <input type="email" class="form-control" name="guestEmail" id="guestEmail" value="{{post.guestEmail}}" required>
+      </div>
+    </div>
+  </div>
+  <div class="row admin editor bg-light p-2">
+    <h3>تنظیمات ویراستاری</h3>
+  </div>
+  <div class="row admin editor bg-light">
+    <div class="col-3 form-group">
+      <label for="tag">برچسب</label>
+      <input type="text" class="form-control" id="tag" value="{{post.tag}}" placeholder="بازیگر این صفحه از روایت ..." />
+    </div>
+    <div class="col-3">
+      <label for="txtCase">Case</label>
+      <select class="form-control" name="txtCase" id="txtCase">
+        {% for case in site.cases %}
+        <option value="{{case.slug}}">{{case.title}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-3">
+      <label for="txtSlug" dir="ltr" >ُSlug</label>
+      <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" value="{{postSlug}}" placeholder="slug..." />
+    </div>
+    <div class="col-3 form-group">
+      <label for="tag">اقدام</label>
+      <select class="form-control" name="action">
+        <option value="save">ذخیره</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col">
+      <button type="submit" class="form-action-btn btn btn-primary btn-lg btn-block"><span class="spinner-border" style="display:none;"></span> ثبت</button>
+    </div>
+</div>
+</form>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#txtCase').val('{{post.case}}')
+    $('.mediaType').change(function () {
+      if ($(this).val() == 'image') {
+        $('.upload').show();
+        $('#file').attr('accept', 'image/*');
+      } else if ($(this).val() == 'video') {
+        $('.upload').show();
+        $('#file').attr('accept', 'video/*');
+      } else if ($(this).val() == 'audio') {
+        $('.upload').show();
+        $('#file').attr('accept', 'audio/*');
+      } else {
+        $('.upload').hide();
+      }
+    });
+    $('.mediaType').trigger('change');
+    var orgPostStartDateU = new persianDate([{{orgPost.startDate}}]);
+    $($('input[name=startDate].orgPost').closest('.input-group').find("input[type=hidden]")).val(orgPostStartDateU.format('X')+'000')
+    var orgPostEndDateU = new persianDate([{{orgPost.startDate}}]);
+    $($('input[name=endDate].orgPost').closest('.input-group').find("input[type=hidden]")).val(orgPostEndDateU.format('X')+'000')
+    $('.image-delete').click(function () {
+      $(this).hide();
+      $('.uploadImg').show();
+      $(this).siblings('.uploadedImg').hide();
+      $(this).siblings('.btn-success').attr('href', '');
+    })
+    {% if post.media %}
+      $('.uploadedImg').show();
+      $('.uploadImg').hide();
+    {% else %}
+    $('.uploadedImg').hide();
+    $('.uploadImg').show();
+    {% endif %}
+    var to, from;
+  to = $("#endDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#endDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          to.touched = true;
+          if (from && from.options && from.options.maxDate != unix) {
+              var cachedValue = from.getState().selected.unixDate;
+              from.options = {maxDate: unix};
+              if (from.touched) {
+                  from.setDate(cachedValue);
+              }
+          }
+      }
+  });
+  from = $("#startDate").persianDatepicker({
+    initialValue: false,
+    responsive: true,
+    format: 'L',
+    autoClose: true,
+    altField: '#startDateU',
+    calendar:{
+      persian:{
+        showHint: true
+      },
+      gregorian:{
+        showHint: true
+      }
+    },
+    onSelect: function (unix) {
+          from.touched = true;
+          if (to && to.options && to.options.minDate != unix) {
+              to.options = {minDate: unix};
+              to.setDate(unix);
+          }
+      }
+  });
+  var fromDate = new persianDate([{{post.startDate}}]);
+  var toDate = new persianDate([{{post.endDate}}]);
+  from.setDate(fromDate);
+  to.setDate(toDate);
+});
+function editor(user) {
+  $('select[name=action]').append('<option class="editor" value="publish">انتشار</option>');
+}
+</script>

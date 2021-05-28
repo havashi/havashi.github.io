@@ -5,222 +5,24 @@ sidebar: 'no'
 {% assign case_posts = site.posts | where: 'case', page.slug  %}
 {% assign filtered_posts = case_posts %}
 {% assign post_count = filtered_posts.size %}
-<div id="case-timeline"></div>
-<div id="formEditCase" style="display:none;">
-  <div class="container pt-5">
-    <div class="row pt-5 mt-5">
-        <h3>ویرایش روایت {{page.title}}</h3>
-    </div>
-    {% assign case = page %}
-    {% include addCase.html %}
-  </div>
-</div>
-<div id="formAddEvent" style="display:none;">
-  <script type="text/javascript">
-
-  $(document).ready(function() {
-    var to, from;
-  to = $("#endDate").persianDatepicker({
-    initialValue: false,
-    responsive: true,
-    format: 'L',
-    autoClose: true,
-    altField: '#endDateU',
-    calendar:{
-      persian:{
-        showHint: true
-      },
-      gregorian:{
-        showHint: true
-      }
-    },
-    onSelect: function (unix) {
-          to.touched = true;
-          if (from && from.options && from.options.maxDate != unix) {
-              var cachedValue = from.getState().selected.unixDate;
-              from.options = {maxDate: unix};
-              if (from.touched) {
-                  from.setDate(cachedValue);
-              }
-          }
-      }
-  });
-  from = $("#startDate").persianDatepicker({
-    initialValue: false,
-    responsive: true,
-    format: 'L',
-    autoClose: true,
-    altField: '#startDateU',
-    calendar:{
-      persian:{
-        showHint: true
-      },
-      gregorian:{
-        showHint: true
-      }
-    },
-    onSelect: function (unix) {
-          from.touched = true;
-          if (to && to.options && to.options.minDate != unix) {
-              to.options = {minDate: unix};
-              to.setDate(unix);
-          }
-      }
-  });
-  var fromDate = new persianDate();
-  var toDate = new persianDate();
-  from.setDate(fromDate);
-  to.setDate(toDate);
-  });
-  </script>
-      <div class="container pt-3">
-        <div class="row mt-5">
-          <h3 class="px-2 mt-5 text-secondary">اضافه کردن یک صفحه به روایت {{page.title}}</h3>
-        </div>
-        <form id="editPost" action="index.html" data-action="addPost" method="post">
-          <!--Add few elements to the form-->
-          <div class="row">
-            <div class="col form-group">
-              <label for="title">عنوان</label>
-              <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="Tooltip on top" autofocus id="title" placeholder="کوتاه و گویا و به فارسی ..." />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col form-group">
-              <label for="startDate">از تاریخ</label>
-              <input type="text" class="form-control" id="startDate" placeholder="تاریخ شروع..." />
-              <input type="hidden" id="startDateU" />
-            </div>
-            <div class="col form-group">
-              <label for="endDate">تا تاریخ</label>
-              <input type="text" class="form-control" id="endDate" placeholder="در صورتی که اتفاق در یک روز بوده مشابه تاریخ شروع در غیر اینصورت تاریخ پایان اتفاق" />
-              <input type="hidden" id="endDateU" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col form-group">
-              <label for="text">توضیح</label>
-                <textarea id="text" name="msg" class="form-control" placeholder="شرح مختصری درباره این صفحه از روایت بنویسید..." style="height:100px"></textarea>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="form-group">
-                <label>فایل پیوست</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <select class="form-control mediaType">
-                      <option value="">نوع فایل ...</option>
-                      <option value="image">عکس</option>
-                      <option value="video">ویدئو</option>
-                      <option value="audio">فایل صوتی</option>
-                    </select>
-                  </div>
-                  <div class="upload custom-file uploadImg" style="display:none;">
-                    <input type="file" class="uploadImg custom-file-input" id="file" accept="image/*">
-                    <label class="custom-file-label" for="file" accept="image/*">Choose file</label>
-                  </div>
-                  <div class="upload input-group-append git" style="display:none;">
-                    <a href="javascript:void(0)" class="uploadGit uploadImg btn btn-secondary btn-sm" id="uploadFImg">بارگذاری</a>
-                    <a href="{{page.media}}" class="image-link uploadedImg btn btn-success btn-sm" target="_blank" style="display: none;" data-path="">نمایش</a>
-                    <a href="javascript:void(0)" class="image-delete uploadedImg btn btn-danger btn-sm" style="display: none;">حذف</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="mediaCaption">توضیح فایل پیوست</label>
-              <input type="text" class="form-control" id="mediaCaption" placeholder="کپشن مدیا..." />
-            </div>
-            <div class="col">
-              <label for="mediaCaptionUrl">منبع فایل پیوست</label>
-              <input type="text" class="form-control" lang="en" dir="ltr" id="mediaCaptionUrl" placeholder="Media Caption URL..." />
-            </div>
-          </div>
-          <div class="row guest mt-2">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-              <div class="form-group">
-                <label for="guestName">نام و نام خانوادگی ارسال کننده</label>
-                <input type="text" class="form-control" name="guestName" id="guestName" value="{{page.guestName}}" required>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-              <div class="form-group">
-                <label for="guestEmail">ایمیل ارسال کننده</label>
-                <input type="email" class="form-control" name="guestEmail" id="guestEmail" value="{{page.guestEmail}}" required>
-              </div>
-            </div>
-          </div>
-          <div class="row admin bg-light p-2">
-            <h3>تنظیمات ویراستاری</h3>
-          </div>
-          <div class="row admin bg-light">
-            <div class="col-6 form-group">
-              <label for="tag">برچسب</label>
-              <input type="text" class="form-control" id="tag" placeholder="بازیگر این صفحه از روایت ..." />
-            </div>
-            <div class="col-3">
-              <label for="txtCase">Case</label>
-              <input type="text" lang="en" dir="ltr" class="form-control" id="txtCase" placeholder="case..." value="{{page.slug}}"/>
-            </div>
-            <div class="col-3">
-              <label for="txtSlug" dir="ltr" >ُSlug</label>
-              <input type="text" lang="en" dir="ltr" class="form-control" id="txtSlug" placeholder="slug..." />
-            </div>
-          </div>
-          <div class="row mt-2">
-            <div class="col">
-                <input type="submit" id="bt" value="ثبت" class="btn btn-primary btn-lg btn-block" />
-            </div>
-        </div>
-      </form>
-
-      </div>
-</div>
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.mediaType').change(function () {
-      if ($(this).val() == 'image') {
-        $('.upload').show();
-        $('#file').attr('accept', 'image/*');
-      } else if ($(this).val() == 'video') {
-        $('.upload').show();
-        $('#file').attr('accept', 'video/*');
-      } else if ($(this).val() == 'audio') {
-        $('.upload').show();
-        $('#file').attr('accept', 'audio/*');
-      } else {
-        $('.upload').hide();
+      if (urlParams.get('post')){
+        var postslug = '{{page.slug}}-'+urlParams.get('post');
+        {% for post in filtered_posts%}
+          if (postslug == '{{post.slug}}' ) {
+            window.location.href = '/{{page.slug}}#{{forloop.rindex}}';
+          }
+        {% endfor %}
       }
-    });
-    var currentPost = {
-      'case': '{{page.slug}}',
-      'postSlug': '{{page.slug}}-'+makeid(4)
-    };
-    sessionStorage.setItem("currentPost", JSON.stringify(currentPost));
-
-    if (urlParams.get('go') == "add") {
-      $('#formAddEvent').show();
-      $('#formEditCase').hide();
-      $('#txtSlug').val('{{page.slug}}-'+ makeid(4));
-    } else if (urlParams.get('go') == "edit") {
-      $('#formAddEvent').hide();
-      $('#formEditCase').show();
-    } else {
-      $('#formAddEvent').hide();
-      $('#formEditCase').hide();
       var dataObject = {
     	timeline:
     	{
     		headline:"{{page.title}}",
     		type:"default",
-    		text:"{{page.tlCoverTxt}}",
+    		text:"{{page.content | strip_html | strip_newlines}}",
     		asset: {
-    			media:"{{page.tlImgCover}}",
-    			credit:"{{page.tlImgCredit}}",
-    			caption:"{{page.tlImgCaption}}"
+    			media:"{{page.coverImg}}"
     		},
     		date: [
         {% for post in filtered_posts %}
@@ -236,14 +38,13 @@ sidebar: 'no'
     				startDate:"{{post.startDate}}",
     				endDate:"{{post.endDate}}",
     				headline:"{{post.title}}",
-    				text:"{{post.content | strip_html | strip_newlines}}",
+    				text:"{{post.content | strip_html | strip_newlines}} <br><a href='{{page.url}}?post={{post.slug | split: '-' | last}}' target='_blank' class='btn btn-primary btn-sm small text-light p-1 rounded-0' style='font-size: 11px;'>لینک ثابت</a><a href='{{post.url}}' target='_blank' class='btn btn-secondary btn-sm small text-light p-1 rounded-0' style='font-size: 11px;'>پیشنهاد اصلاح</a><a href='{{post.url}}' target='_blank' class='btn btn-danger btn-sm small text-light p-1 rounded-0' style='font-size: 11px;'>گزارش خطا</a><small></small>",
     				tag:"{{post.tag}}",
     				classname:"optionaluniqueclassnamecanbeaddedhere",
     				asset: {
     					media:"{{postMedia}}",
     					thumbnail:"{{post.thumbnail}}",
-              credit:"{% if post.mediaCaptionUrl %}<a href='{{post.mediaCaptionUrl}}' target='blank'>{%endif%}{{post.mediaCaption}}{% if post.mediaCaptionUrl %}</a>{%endif%}",
-    					caption:"<a href='{{post.url}}' target='_blank' class='btn btn-primary btn-sm small text-light p-1'>پیشنهاد اصلاح</a><a href='{{post.url}}' target='_blank' class='btn btn-danger btn-sm small text-light p-1'>گزارش خطا</a>"
+              credit:"{% if post.mediaCaptionUrl %}<a href='{{post.mediaCaptionUrl}}' target='blank'>{%endif%}{{post.mediaCaption}}{% if post.mediaCaptionUrl %}</a>{%endif%}"
     				}
     			},
           {% endfor %}
@@ -262,15 +63,14 @@ sidebar: 'no'
     };
       createStoryJS({
         type:		'timeline',
-        height:		'100%',
         lang:				'fa',							//OPTIONAL LANGUAGE
         source:		dataObject,
         embed_id:	'case-timeline',
+        is_embed: 'true',
         hash_bookmark:		true,
         font:				'IRANSans'				//OPTIONAL FONT
       });
 
-    }
     var smap = L.map('sideMap').setView([{{page.location}}], 17);
     Thunderforest_TransportDark.addTo(smap);
     var geoJSONTag = {{page.geoJSONTag}};
@@ -284,3 +84,30 @@ sidebar: 'no'
       });
   });
 </script>
+<section style="height: calc(100vh - 56px)">
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 order-lg-last order-md-last order-sm-last p-0">
+      <div class="card h-100 bg-dark text-light text-center h-100 rounded-0">
+        <div id="sideMap" class="card-img-top text-muted" style="height: 250px;"></div>
+        <div class="card-body">
+          <h5 id="geoTitle" class="card-title">{{page.title}}</h5>
+          <p id="geoDes" class="card-text">{{page.content | strip_html | strip_newlines | truncatewords: 50 }}</p>
+          <a href="?go=1#{{post_count}}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="از انتها"><i class="fas fa-step-forward"></i></a>
+          <a href="/drafts/add?case={{page.slug}}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="افزودن صفحه جدید"><i class="fas fa-calendar-plus"></i>  صفحه جدید</a>
+          <a href="?go=0#0" class="btn btn-primary btn-sm"><i class="fas fa-step-backward" data-toggle="tooltip" data-placement="bottom" title="از ابتدا"></i></a>
+
+        </div>
+        {%if page.location%}
+        <div class="card-footer p-0 bg-primary">
+          <a href="/" class="btn btn-sm btn-secondary btn-lg btn-block">بازگشت به نقشه اصلی</a>
+        </div>
+        {%endif%}
+      </div>
+  </div>
+  <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12 p-0">
+    <div id="case-timeline"></div>
+  </div>
+</div>
+</div>
+</section>

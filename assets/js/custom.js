@@ -77,9 +77,9 @@ $(document).ready(function(){
                 $('.floatingMenu').hide();
             }
         });
-        $('.persianDate').each(function () {
+        $(document).find('.persianDate').each(function () {
           var postDate = new Date(parseInt($(this).attr('data-timestamp'))*1000);
-          $(this).text(postDate.toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' }));
+          $(this).text(postDate.toLocaleDateString('fa-IR', { year: 'numeric', month: 'numeric', day: 'numeric' }));
         })
 
         $("input[type=file].custom-file-input").change(function (){

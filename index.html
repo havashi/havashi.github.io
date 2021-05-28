@@ -1,9 +1,14 @@
 ---
 title: روایت به حاشیه‌رانده‌شدگان شهر
 sidebar: 'no'
+scripts: [leaflet]
 ---
-
-<div id="mapid"></div>
+<div id="wrapper">
+{% include sidebar.html %}
+<div id="page-content-wrapper" class="p-0">
+		<div id="mapid"></div>
+</div>
+</div>
 
 <script>
 	var map = L.map('mapid').setView([35.689167, 51.388889], 12);

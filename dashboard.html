@@ -1,11 +1,12 @@
 ---
 layout: default
-title: داشبورد
+title: محیط کاربری
+scripts: [userbase, login]
 ---
-<section class="user" style="margin-top:100px;">
+<section class="user pt-3">
   <div class="container">
     <div class="row">
-      <h5>محیط کاربری <span class="userFullname"></span></h5>
+      <h5>محیط کاربری <span class="userFullname"> </span> </h5><a href="/dashboard/profile" class="btn btn-primary btn-sm ml-2 p-1"><small>ویرایش</small></a><a href="javascript:void(0)" class="btn btn-danger btn-sm p-1" onclick="handleLogout()"><small>خروج</small></a><small id="logout-error"></small>
     </div>
     <div class="row">
       <div class="col-6">
@@ -59,16 +60,7 @@ title: داشبورد
 								<th class="small" scope="col">تاریخ</th>
 							</tr>
 						</thead>
-						<tbody>
-              {% for post in site.drafts  limit:10%}
-              {% if post.draftPublish == 0 %}
-							<tr>
-								<td class="small"><a href="{{post.url}}">{{post.title}}</a></td>
-								<td class="small">{% assign cas = site.cases | where: 'slug', post.case | first %}{% if cas %}{{cas.title | truncatewords: 3}}{% endif %}</td>
-								<td class="small" data-timestamp="{{post.editDate}}"></td>
-							</tr>
-              {% endif %}
-              {% endfor %}
+						<tbody id="edPostDrafts">
 						</tbody>
 					</table>
 				</div>
@@ -83,15 +75,7 @@ title: داشبورد
 								<th class="small" scope="col">تاریخ</th>
 							</tr>
 						</thead>
-						<tbody>
-              {% for case in site.cases  limit:10%}
-              {% if case.draftPublish == 0 %}
-							<tr>
-								<td class="small"><a href="{{case.url}}?go=edit">{{case.title}}</a></td>
-								<td class="small" data-timestamp="{{case.editDate}}"></td>
-							</tr>
-              {% endif %}
-              {% endfor %}
+						<tbody id="edCaseDrafts">
 						</tbody>
 					</table>
 				</div>
@@ -105,14 +89,41 @@ title: داشبورد
       $.getJSON('/drafts.json', function(data) {
         $.each(data, function(i, item){
           if(item.author === username && item.draftPublish == 0){
-            $('#myRecentDrafts').prepend('<tr><td class="small"><a href="'+item.url+'">'+readMore(item.title, 4)+'</a></td><td class="small">'+readMore(item.case, 3)+'</td><td class="persianDate small" data-timestamp="'+item.date+'"></td></tr>')
+            var postDate = new Date(parseInt(item.date)*1000);
+            postDate = postDate.toLocaleDateString('fa-IR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+            $('#myRecentDrafts').prepend('<tr><td class="small"><a href="'+item.url+'">'+readMore(item.title, 4)+'</a></td><td class="small">'+readMore(item.case, 3)+'</td><td class="small">'+postDate+'</td></tr>')
           }
         });
       });
       $.getJSON('/cases.json', function(data) {
         $.each(data, function(i, item){
           if(item.author === username && item.draftPublish == 0){
-            $('#myRecentCases').prepend('<tr><td class="small"><a href="'+item.url+'?go=edit">'+readMore(item.title, 6)+'</a></td><td class="persianDate small" data-timestamp="'+item.date+'"></td></tr>')
+            var postDate = new Date(item.date*1000);
+            postDate = postDate.toLocaleDateString('fa-IR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+            $('#myRecentCases').prepend('<tr><td class="small"><a href="/cases/edit/?id='+item.slug+'">'+readMore(item.title, 6)+'</a></td><td class="small">'+postDate+'</td></tr>')
+          }
+        });
+      });
+    }
+    function guest() {
+      window.location.replace('/login/');
+    }
+    function editor(user) {
+      $.getJSON('/drafts.json', function(data) {
+        $.each(data, function(i, item){
+          if(item.draftPublish == 0){
+            var postDate = new Date(parseInt(item.date)*1000);
+            postDate = postDate.toLocaleDateString('fa-IR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+            $('#edPostDrafts').prepend('<tr><td class="small"><a href="'+item.url+'">'+readMore(item.title, 4)+'</a></td><td class="small">'+readMore(item.case, 3)+'</td><td class="small">'+postDate+'</td></tr>')
+          }
+        });
+      });
+      $.getJSON('/cases.json', function(data) {
+        $.each(data, function(i, item){
+          if(item.draftPublish == 0){
+            var postDate = new Date(item.date*1000);
+            postDate = postDate.toLocaleDateString('fa-IR', { year: 'numeric', month: 'numeric', day: 'numeric' });
+            $('#edCaseDrafts').prepend('<tr><td class="small"><a href="'+item.url+'?go=edit">'+readMore(item.title, 6)+'</a></td><td class="small">'+postDate+'</td></tr>')
           }
         });
       });

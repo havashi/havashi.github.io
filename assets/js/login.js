@@ -25,8 +25,9 @@ function setLogin(user) {
     }
     if (userRole == 'editor') {
       $('.editor').show();
+      editor(user);
     } else {
-      $('.editor').empty().hide();
+      $('.editor').hide();
     }
     $('.userFullname').text(userFullname);
     $('.userUsername').text(userUsername);
@@ -36,15 +37,27 @@ function setLogin(user) {
 function setLogout(){
   $(document).ready(function () {
     $('.guest').show();
-    $('.editor').empty();
-    $('.user').empty();
+    $('.editor').hide();
+    $('.user').hide();
     guest();
   })
 }
+function handleLogout() {
+  userbase.signOut()
+    .then(() => {
+      console.log('22');
+      window.location.replace("/login/");
+    })
+    .catch((e) => document.getElementById('logout-error').innerText = e)
+}
 function loadPage() {
   $('.loading').hide();
+
 }
 function afterLogin() {
 }
 function guest() {
+}
+function editor(user) {
+
 }

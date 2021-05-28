@@ -1,0 +1,58 @@
+---
+layout: default
+title: ویرایش روایت
+slug: add
+permalink: /cases/edit/
+scripts: [userbase, login, leaflet, leafletDraw]
+---
+<section class="pt-3">
+  <div class="container">
+    <div class="row">
+      <h2>ویرایش روایت <span id="caseTitle"></span></h2>
+    </div>
+    {% include addCase.html %}
+  </div>
+</section>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $.getJSON('/cases.json', function(data) {
+      var caseID = urlParams.get('id');
+      var objects = data.filter(function(v){return v.draftPublish == 0});
+      objects = objects.filter(function(v){return v.slug == caseID});
+      $('#caseTitle').text(objects[0].title);
+      $('#title').val(objects[0].title);
+      $('#text').val(objects[0].content);
+      $('#guestName').val(objects[0].authorName);
+      $('#guestEmail').val(objects[0].author);
+      $('#slug').val(objects[0].slug);
+      $('#categories').val(objects[0].categories);
+      $('#geoTag').val(objects[0].geoJSONTag);
+      $('#location').val(objects[0].location);
+      $('#bounds').val(objects[0].bounds);
+      if (objects[0].coverImg) {
+        $('.image-link').attr('href', objects[0].coverImg);
+        $('.image-link').attr('data-path', objects[0].coverImg);
+        $('.uploadedImg').show();
+        $('.uploadImg').hide();
+      } else {
+        $('.uploadedImg').hide();
+        $('.uploadImg').show();
+      }
+      if (objects[0].location) {
+        var center = objects[0].location;
+        var x = center[0];
+        var y = center[1];
+        if (objects[0].geoJSONTag) {
+          var geoJSONTag = objects[0].geoJSONTag;
+          var geojsonLayer = L.geoJson(objects[0].geoJSONTag);
+          geojsonLayer.eachLayer(
+              function(l){
+                  drawnItems.addLayer(l);
+          });
+
+        }
+        casemap.flyTo([x, y], 14)
+      }
+    });
+  })
+</script>

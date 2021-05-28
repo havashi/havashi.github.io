@@ -48,16 +48,24 @@
     </div>
   </div>
   <div class="row admin">
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class="form-group">
         <label for="slug">نامک Slug</label>
         <input type="text" class="form-control" name="slug" id="slug" value="{{case.slug}}" required>
       </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class="form-group">
         <label for="categories">دسته <small>(اختیاری)</small></label>
         <input type="text" class="form-control" name="categories" id="categories" value="{{case.categories}}">
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="form-group editor">
+        <label>اقدام</label>
+        <select class="form-control" name="caseAction">
+          <option value="save">ذخیره</option>
+        </select>
       </div>
     </div>
   </div>
@@ -98,11 +106,8 @@
       var casemap = new L.Map('formMap', { center: new L.LatLng(33.65, 53.36), zoom: 6 });
       {% if case.location %}
       var center = [{{case.location}}];
-      console.log(center);
       var x = center[0];
       var y = center[1];
-      console.log(x);
-      console.log(y);
       {% if case.geoJSONTag %}
       var geoTag = '{{case.geoJSONTag}}';
       var geoJSONTag = JSON.parse(geoTag);
@@ -191,4 +196,8 @@ function getMapLocation() {
   $('input[name=location]').val(mapLatLng.lat+', '+mapLatLng.lng);
   $('input[name=bounds]').val(JSON.stringify(casemap.getBounds()));
 }
+function editor(user) {
+  $('select[name=caseAction]').append('<option class="editor" value="publish" selected>انتشار</option>');
+}
+
   //]]></script>

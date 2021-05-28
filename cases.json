@@ -5,7 +5,15 @@ layout: none
   {% for post in site.cases %}
     {
       "title"    : "{{ post.title | escape }}",
+      "slug"    : "{{ post.slug | escape }}",
       {% if post.draftPublish %}"draftPublish"  : {{post.draftPublish}},{% endif%}
+      {% if post.categories %}"categories"  : "{{post.categories}}",{% endif%}
+      {% if post.coverImg %}"coverImg"  : "{{post.coverImg}}",{% endif%}
+      {% if post.location %}{% capture location %}[{{post.location}}]{% endcapture %}"location"  : {{location}},{% endif%}
+      {% if post.bounds %}"bounds"  : {{post.bounds}},{% endif%}
+      {% if post.geoJSONTag %}"geoJSONTag"  : {{post.geoJSONTag}},{% endif%}
+      {% if post.guestName %}"authorName"  : "{{post.guestName}}",{% endif%}
+      {% if post.content %}"content"  : "{{post.content | strip_html | strip_newlines}}",{% endif%}
       {% if post.guestEmail %}"author"   : "{{post.guestEmail}}",{% endif%}
       {% if post.editDate %}"date"     : "{{post.editDate}}",{% endif%}
       "url"      : "{{ site.baseurl }}{{ post.url }}"
