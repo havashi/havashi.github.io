@@ -3,11 +3,11 @@ draftPublish: 0
 title: آسیه پناهی 
 slug: asiyeh 
 categories:  
-coverImg: /assets/uploads/2021/11/4/_112563999_a0e24a31-1d99-4877-8da7-ef55003fb78c.jpg 
+coverImg: /assets/uploads/2022/0/1/872497_834.jpg 
 location: 34.30541014718436, 47.100223302841194 
-bounds: '{"_southWest":{"lat":34.30541014718436,"lng":47.100223302841194},"_northEast":{"lat":34.30541014718436,"lng":47.100223302841194}}' 
-geoJSONTag: '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[47.100223,34.30541]}}]}' 
-editDate: 1639063886 
+bounds: '{"_southWest":{"lat":34.284169583046236,"lng":47.05255508422852},"_northEast":{"lat":34.32670957700342,"lng":47.14782714843751}}' 
+geoJSONTag: '[object Object]' 
+editDate: 1642415094 
 guestName: علی طیبی 
 guestEmail: 7ayebi@gmail.com 
 ---
