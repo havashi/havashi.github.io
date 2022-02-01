@@ -11,7 +11,7 @@ mediaCaption: خبرگزاری دانشجو
 mediaCaptionUrl: https://snn.ir/003Zaf 
 guestName: علی طیبی 
 guestEmail: 7ayebi@gmail.com 
-editDate: 1643680518 
+editDate: 1643680747 
 postSlug: asiyeh-A5TA 
 draftPublish: 1 
 ---
