@@ -1,6 +1,6 @@
 --- 
 case: asiyeh 
-title: تذکر کتبی نمایندگان مجلس به مسئولان اجرایی بابت مرگ آسیه پناهی 
+title: تذکر کتبی نمایندگان مجلس به مسئولان اجرایی بابت مرگ آسیه پناهی jsj 
 slug: asiyeh-A5TA-7ayebi 
 startDate: "1400,10,27" 
 endDate: "1400,10,27" 
@@ -11,7 +11,7 @@ mediaCaption: خبرگزاری دانشجو
 mediaCaptionUrl: https://snn.ir/003Zaf 
 guestName: علی طیبی 
 guestEmail: 7ayebi@gmail.com 
-editDate: 1643680747 
+editDate: 1643680760 
 postSlug: asiyeh-A5TA 
 draftPublish: 1 
 ---
