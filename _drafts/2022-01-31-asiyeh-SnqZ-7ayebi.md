@@ -11,8 +11,8 @@ mediaCaption: تست
 mediaCaptionUrl: تست 
 guestName: علی طیبی 
 guestEmail: 7ayebi@gmail.com 
-editDate: 1643681417 
+editDate: 1643681469 
 postSlug: asiyeh-SnqZ 
-draftPublish: 0 
+draftPublish: 1 
 ---
 تست
