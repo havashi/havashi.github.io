@@ -1,11 +1,14 @@
-var currentUser, currentUserProfile, userProfile, userProtectedProfile, userUsername, userFullname, userRole;
-var appID = '18075c64-f224-4a69-9ae2-1a89f43df30a'
-userbase.init({ appId: appID })
-      .then((session) => session.user ? setLogin(session.user) : setLogout())
-      .finally(() => loadPage());
+$(document).ready(function () {
+  $('#loading').show();
+  var currentUser, currentUserProfile, userProfile, userProtectedProfile, userUsername, userFullname, userRole;
+  var appID = '18075c64-f224-4a69-9ae2-1a89f43df30a'
+  userbase.init({ appId: appID })
+  .then((session) => session.user ? setLogin(session.user) : setLogout())
+  .finally(() => loadPage());
+})
 function setLogin(user) {
-  $(document).ready(function functionName() {
     $('.user').show();
+    $('.guest').hide();
     var currentUser = user;
     if (user.profile) {
       var userProfile = user.profile;
@@ -30,9 +33,11 @@ function setLogin(user) {
       $('.editor').hide();
     }
     $('.userFullname').text(userFullname);
+    $('.userFullnameInput').val(userFullname);
     $('.userUsername').text(userUsername);
+    $('.userUsernameInput').val(userUsername);
+
     afterLogin(user);
-  })
 }
 function setLogout(){
   $(document).ready(function () {
@@ -51,12 +56,12 @@ function handleLogout() {
     .catch((e) => document.getElementById('logout-error').innerText = e)
 }
 function loadPage() {
-  $('.loading').hide();
-
+  $('#loading').hide();
 }
 function afterLogin() {
 }
 function guest() {
+  console.log('test');
 }
 function editor(user) {
 

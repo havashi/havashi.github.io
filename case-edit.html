@@ -26,9 +26,10 @@ scripts: [userbase, login, leaflet, leafletDraw]
       $('#guestEmail').val(objects[0].author);
       $('#slug').val(objects[0].slug);
       $('#categories').val(objects[0].categories);
-      $('#geoTag').val(objects[0].geoJSONTag);
+      $('#geoTag').val(JSON.stringify(objects[0].geoJSONTag));
       $('#location').val(objects[0].location);
       $('#bounds').val(objects[0].bounds);
+      $('#caseAction').val(objects[0].draftPublish);
       if (objects[0].coverImg) {
         $('.image-link').attr('href', objects[0].coverImg);
         $('.image-link').attr('data-path', objects[0].coverImg);

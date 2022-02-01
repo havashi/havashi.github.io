@@ -10,7 +10,7 @@
         <ul class="floatingMenu">
           {% for item in site.data.navigation %}
           <li>
-            <a href="{{item.link}}" class="{% if page.url == item.link %}active{% endif %}">{{ item.name }}{% if page.url == item.link %}<span class="sr-only">(کنونی){% endif %}</span></a>
+            <a href="{{item.link}}" class="{% if page.url == item.link %}active{% endif %} {% if item.name == 'user'%}user userFullname{%endif%}" {% if item.name == 'user' %}style='display:none;'{%endif%}>{{ item.name }}{% if page.url == item.link %}<span class="sr-only">(کنونی){% endif %}</span></a>
           </li>
           {%endfor%}
         </ul>

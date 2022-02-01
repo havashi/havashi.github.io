@@ -76,12 +76,13 @@ defaults:
       layout: "review"
       scripts: [pd, pdp]
       github: 1
+      scripts: [userbase, login, pd, pdp]
   - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
-      scripts: [pd, pdp]
+      scripts: [userbase, login, pd, pdp]
       github: 1
   - scope:
       path: ""

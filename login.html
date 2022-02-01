@@ -94,6 +94,11 @@ scripts: [userbase, login]
   </div>
 </div>
 <script type="text/javascript">
+  $(document).ready(function () {
+
+    $('#loading').hide();
+  })
+
   function afterLogin(user) {
     window.location.href="/dashboard";
   }
@@ -133,5 +138,4 @@ scripts: [userbase, login]
 
   document.getElementById('singnupFrom').addEventListener('submit', handleSignUp)
   document.getElementById('singninFrom').addEventListener('submit', handleSignIn)
-
 </script>

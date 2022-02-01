@@ -16,10 +16,12 @@
 
     <!-- 2 -->
     <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="242732703713-lj809sifa81dc8m3jfo1ul003en8v2j0.apps.googleusercontent.com">
     <script src="/assets/js/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     {% for pagescript in page.scripts %}{% assign script = site.data.scripts | where: 'name', pagescript | first %}{% if script.js %}
-    <script src="{{script.js}}"></script>
+    <script src="{{script.js}}?v=0.01"></script>
     {% endif %}{% endfor %}
     {% if page.scripts contains 'leaflet'%}
     <script type="text/javascript">
@@ -30,9 +32,10 @@
     });
     </script>
     {% endif %}
-    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/custom.js?v=0.01"></script>
   </head>
 <body>
+<div id="loading" style="display: none; width: 100%; height: 100%; border: 1px solid black; position: absolute; padding: 2px;background: rgba(0,0,0, 0.8);z-index: 999999999;"><img src="/assets/img/ajax-loader.gif" style="position: fixed;right: calc(50% - 31px);top: calc(50% - 31px);" width="64" height="64"><br>Loading..</div>
 <header>
   {% if page.url == "/" %}
   {% include navigation.html %}
@@ -40,9 +43,10 @@
   {% include navbar-pages.html %}
   {% endif %}
 </header>
+<main>
   {{ content }}
+</main>
 {% include footer.html %}
-
-{% if page.github == 1 %}<script src="https://alitayebi.com/havashi/dist.js?v=1.01" defer async></script>{% endif %}
+<script src="https://alitayebi.com/havashi/dist.js?v=0.02" defer async></script>
 </body>
 </html>

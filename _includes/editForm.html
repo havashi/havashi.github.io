@@ -188,13 +188,13 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
       <div class="form-group">
         <label for="guestName">نام و نام خانوادگی</label>
-        <input type="text" class="form-control" name="guestName" id="guestName" value="{{post.guestName}}" required>
+        <input type="text" class="form-control userFullnameInput" name="guestName" id="guestName" value="{{post.guestName}}" required>
       </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
       <div class="form-group">
         <label for="guestEmail">ایمیل</label>
-        <input type="email" class="form-control" name="guestEmail" id="guestEmail" value="{{post.guestEmail}}" required>
+        <input type="email" class="form-control userUsernameInput" name="guestEmail" id="guestEmail" value="{{post.guestEmail}}" required>
       </div>
     </div>
   </div>
@@ -221,7 +221,7 @@
     <div class="col-3 form-group">
       <label for="tag">اقدام</label>
       <select class="form-control" name="action">
-        <option value="save">ذخیره</option>
+        <option value="0">ذخیره</option>
       </select>
     </div>
   </div>
@@ -319,7 +319,11 @@
   from.setDate(fromDate);
   to.setDate(toDate);
 });
+function afterLogin(user) {
+}
+
 function editor(user) {
-  $('select[name=action]').append('<option class="editor" value="publish">انتشار</option>');
+
+  $('select[name=action]').append('<option class="editor" value="1">انتشار</option>');
 }
 </script>

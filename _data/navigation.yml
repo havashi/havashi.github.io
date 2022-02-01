@@ -6,5 +6,8 @@
   link: /stories
 - name: ارسال روایت
   link: /cases/add/
+- name: user
+  link: /dashboard/
+  class: userFullname
 - name: تماس
   link: /contact
